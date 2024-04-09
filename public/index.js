@@ -33,15 +33,19 @@ import { getDatabase, ref, get } from "https://www.gstatic.com/firebasejs/10.6.0
 
   // Your web app's Firebase configuration
   // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+console.log("step1")
 
   fetch('/firebase-config')
   .then(response => response.json())
   .then(data => {
+console.log("step2")
+
+      
     // Use the received data (Firebase configuration JSON) here
     const app = initializeApp(data);
     const auth = getAuth(app);
     const db = getDatabase(app);
-
+console.log("step3")
     // Now you can use the db variable
     onPageLoad(db); // Pass db as an argument to onPageLoad function
   })
