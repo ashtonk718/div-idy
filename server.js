@@ -31,7 +31,7 @@ const firebaseConfig = {
   app.get('/firebase-config', (req, res) => {
     // Check if the request has a referer header
     const referer = req.headers.referer;
-    if (referer && referer.includes('http://localhost:3000/')) {
+    if (referer && referer.includes('https://www.div-idy.com/')) {
         // Referer matches allowed URL, send Firebase config
         res.json(firebaseConfig);
     } else {
