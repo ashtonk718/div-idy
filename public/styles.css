@@ -1928,7 +1928,7 @@ main {
 }
 
 /* Styling for each category item */
-.catagories-shopping {
+.categories-shopping {
   background-color: white; /* Background color for each category box */
   border-radius: 8px; /* Rounded corners */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
@@ -1945,21 +1945,21 @@ main {
 }
 
 /* Color and position for the icons */
-.catagories-shopping .material-symbols-outlined {
+.categories-shopping .material-symbols-outlined {
   font-size: 120px; /* Increased size of the icon */
   color: #77f2a1; /* Icon color */
   cursor: pointer;
 }
 
 /* Styling the text at the bottom */
-.catagories-shopping span + text {
+.categories-shopping span + text {
   margin-top: auto; /* Pushes the text to the bottom */
   font-weight: bold; /* Makes the text bold */
   cursor: pointer;
 }
 
 /* Hover effect for each category */
-.catagories-shopping:hover {
+.categories-shopping:hover {
   transform: translateY(-5px); /* Slight lift effect */
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
 }
