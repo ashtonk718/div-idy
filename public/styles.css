@@ -1,0 +1,2247 @@
+
+
+
+
+/*  View*/
+
+
+#outputviewmode {
+ 
+  width: 100%;
+  height: 700px;
+  border: none; /* Optionally, remove border */
+}
+
+
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+#backarrow{
+  font-size: 4em !important;
+
+
+}
+
+
+#backbtn, #backbtndevtool, #backbtndevtoolmobile {
+  margin-left: -20px; /* Add some space between the back button and the logo */
+  background: none;
+  border: none;
+margin-top: 15px;
+cursor: pointer;
+margin-right: auto; /* Push devadmin to the right */
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* My account*/
+#myaccountbody{
+
+  background-color: #f9f9f9;
+}
+
+
+.projects {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Horizontally center the items */
+}
+
+.myaccountprojects{
+
+height: 200px;
+text-align: center;
+font-size: 20px;
+width: 80%;
+margin: 10px;
+position: relative;
+box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+border-radius: 8px; /* Adds rounded corners */
+overflow: hidden; /* Ensures content doesn't overflow with rounded corners */
+transition: transform 0.3s ease-in-out; /* Adds a smooth transition effect */
+font-family: 'Arial', sans-serif; /* Change the font to Arial or any other font you prefer */
+background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+background-size: 100% 100%;
+color: #ffffff;
+}
+
+
+
+.myaccountprojects:hover {
+  transform: scale(1.05); /* Enlarges the container on hover */
+}
+
+#newprojectnamemodal {
+  position: fixed;
+  z-index: 3;
+  display: none;
+  background-color: #f9f9f9;
+  text-align: center;
+  padding: 20px;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 0;
+  box-sizing: border-box;
+  color: #1f2b37;
+  
+}
+
+
+#newprojectnamemodal h2 {
+  margin-top: 0;
+  font-size: 24px;
+}
+
+#newprojectnamemodal button {
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+    color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+
+}
+
+
+
+#newprojectnamemodal label {
+  font-size: 16px;
+  display: inline-block; /* Display the label as inline block */
+  margin-bottom: 5px;
+  width: 30%; /* Adjust the width as needed */
+}
+
+#newprojectnamemodal input[type="text"] {
+  width: 70%; /* Adjust the width as needed */
+  padding: 8px;
+  margin-bottom: 10px;
+  border: 2px solid #1f2b37;
+  border-radius: 5px;
+  box-sizing: border-box;
+  background: none;
+  color: #1f2b37;
+  display: inline-block; /* Display the input as inline block */
+}
+
+
+#newprojectnamemodal input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Safari/Chrome autofill background color */
+  transition: background-color 5000s ease-in-out 0s; /* Safari/Chrome autofill transition */
+  -webkit-text-fill-color: #1f2b37 !important; /* Set text color to white */
+
+
+}
+
+#closenew {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #fff;
+}
+
+
+
+
+.pageheader{
+text-align: center;
+color: #1f2b37;
+}
+
+#displayname{
+  text-align: center;
+  color: #1f2b37;
+
+}
+
+
+
+#headerlogomya {
+  margin: 0; /* Remove default margin */
+  font-size: 2em;
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  color: transparent; /* Hide the text color */
+  cursor: pointer;
+  width: 150px;
+}
+
+
+
+#errornewproject{
+
+color: red;
+font-size: 1.2em;
+font-weight: 600;
+
+}
+
+
+
+.delete-btn {
+  position: absolute;
+  bottom: 5px; /* Adjust as needed */
+  right: 5px; /* Adjust as needed */
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* Style the delete icon */
+.delete-icon {
+  color: #1f2b37 !important; /* Make the icon red */
+  font-size: 24px; /* Adjust size as needed */
+}
+
+
+.delete-icon:hover {
+  color: red !important; /* Make the icon red */
+  font-size: 24px; /* Adjust size as needed */
+}
+
+
+
+
+
+#deleteprojectnamemodal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 9999;
+  overflow-y: auto; /* Enable vertical scrolling if needed */
+}
+
+#deleteprojectnamemodal {
+  border-radius: 10px;
+  background-color: #fff;
+  padding: 20px;
+  width: 70%;
+  max-width: 400px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+  text-align: center;
+}
+
+/* Close button styling */
+#deleteprojectnamemodal button#closedelete {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Button styling */
+#deleteprojectnamemodal button {
+  margin-top: 10px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 5px;
+  background-color: #f44336; /* Red color for delete button */
+  color: #fff;
+  cursor: pointer;
+}
+
+#deleteprojectnamemodal button#canceldeleteprojectbtn {
+  background-color: #ccc; /* Light gray color for cancel button */
+}
+
+/* Button hover effect */
+#deleteprojectnamemodal button:hover {
+  opacity: 0.9;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Developer Tools*/
+
+
+
+
+#code-input {
+    display: flex;
+    width: 100%;
+  }
+
+  .inputsection{
+width: 100%;
+color: #1f2b37;
+  }
+  
+  .inputcode {
+    flex: 1; /* Each textarea takes up equal width */
+    box-sizing: border-box;
+    margin-right: 10px;
+    width: 100%;
+    height: 400px;
+    background-color: #1f2b37;
+color: #77f2a1
+
+
+  }
+  
+
+
+  #codeoutputpreview{
+position: fixed;
+  z-index: 3;
+  display: none;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+background-color: white;
+  }
+
+
+  #outputiframepreview{
+width: 100%;
+
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+
+  }
+
+
+
+
+
+  
+  #devicepreview {
+    position: absolute;
+    top: 10px;
+    right: 90px;
+    background: none;
+    color: #4f76f6 !important;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+#devicepreview .material-symbols-outlined {
+  color: #4f76f6; /* Set the color for the icon */
+}
+
+
+#closepreview {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+.preview-container{
+
+text-align: center;
+
+}
+
+  .navdev {
+    width: 100%;
+    display: flex;
+    align-items: center; /* Center items vertically */
+    color: #1f2b37; /* Set text color to black */
+  
+  }
+
+  #devadmin {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: right; /* Center items horizontally */
+    margin-left: auto; /* Push devadmin to the right */
+
+  }
+  
+  #devadmin > * {
+    margin-right: 10px; /* Add some spacing between elements */
+  }
+  
+
+  #aicontainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+/* Styling for the label */
+#ailabel {
+  font-size: 1.2em; /* Slightly larger font size */
+  font-weight: bold; /* Make the text bold */
+  color: #1f2b37; /* Text color */
+  display: block; /* Ensure it occupies full width */
+  margin-bottom: 10px; /* Space below the label */
+  text-align: center; /* Center the label text */
+}
+
+/* Styling for the textarea */
+#changeai {
+  margin-bottom: 10px; /* Spacing between elements */
+  width: 70%;
+  height: 70px;
+  border-radius: 8px; /* More rounded corners */
+  border: none;
+  background-color: #eeeeee; /* Light blue background */
+  color: #1f2b37;
+  text-align: center;
+  margin-top: 5px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+  transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+#changeai::placeholder {
+  color: #1f2b37; /* Placeholder text color */
+}
+
+/* Add hover and focus effects */
+#changeai:hover {
+  background-color: #ececec; /* Slightly darker blue on hover */
+  transform: scale(1.02); /* Slightly enlarge on hover */
+}
+
+#changeai:focus {
+  background-color: #d2d2d2; /* Even darker blue on focus */
+  outline: none; /* Remove default focus outline */
+  box-shadow: 0 0 10px rgba(31, 43, 55, 0.5); /* Add focus shadow */
+}
+
+  
+  
+   #aibuttonsend {
+    background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 3s ease infinite;
+    margin-bottom: 10px; /* Optional: Add spacing between elements */
+    width: 40%;
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    transition: all 0.2s ease; /* Smooth transition for all changes */
+
+  }
+
+  #aibuttonsend:hover {
+    transform: scale(1.05); /* Scale up on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Add shadow on hover */
+}
+
+#aibuttonsend:active {
+    transform: scale(0.95); /* Scale down on click */
+    background: linear-gradient(-45deg, #77f2a1, #4f76f6); /* Invert gradient on click */
+    box-shadow: none; /* Remove shadow on click */
+}
+
+
+
+
+
+
+
+
+
+/* Ripple animation */
+@keyframes ripple-animation {
+  to {
+      transform: scale(4);
+      opacity: 0;
+  }
+}
+
+  #updateoutput{
+    margin-top: 20px; /* Optional: Add spacing between elements */
+    width: 40%;
+    background-color: #4f76f6;
+    color: #fff;
+    border: none;
+    border-radius: 40px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-bottom: 20px;
+
+  }
+
+
+  #previewcontainer{
+display: flex;
+align-items: center; 
+
+
+  }
+
+
+
+
+  #buttonsaveproject {
+    background-color: #4f76f6;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    border-radius: 12px;
+    line-height: 1; /* Adjust line height */
+    border: none !important;
+  }
+  
+  #buttonsaveproject span.material-symbols-outlined {
+    vertical-align: middle; /* Align icon vertically */
+    margin-right: 5px; /* Adjust spacing between icon and text */
+    color: white;
+  }
+  
+  #buttonsaveproject:hover {
+    background-color: #77f2a1; /* Darker green */
+  }
+  
+  
+  #devbody  input {
+
+
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid #999; /* Add a bottom border */
+    font-size: 18px;
+    outline: none;
+    transition: border-color 0.3s ease;
+    background:none;
+
+    }
+
+    #devbody  label {
+      color: #1f2b37;
+      }
+
+
+
+
+
+#devbody{
+  background-color: #f9f9f9;
+
+
+}
+
+
+#headerlogodev{
+  margin: 0; /* Remove default margin */
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  color: transparent; /* Hide the text color */
+  animation: gradientText 15s ease infinite;
+  font-size: 2em;
+  margin-right: auto;
+width: 150px;
+}
+
+
+
+#loadingMessage {
+  display: none;
+  background-color: rgba(0, 4, 11, 0.5); /* Semi-transparent background color */
+  color: white;
+  position: fixed;
+  z-index: 10;
+  margin: 0;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  padding-top: 30vh; /* Center vertically */
+}
+
+
+
+
+
+#stickypreview {
+  background:none;
+  color: white;
+  position: fixed;
+  text-align: center;
+    z-index: 5;
+    margin: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+}
+
+
+
+#sharingmodal {
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#sharingmodal h1 {
+  color: #1f2b37;
+  font-size: 24px;
+}
+
+#sharingmodal button {
+  background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin: 10px;
+  width: 50%;
+}
+
+#sharingmodal button:hover {
+  opacity: 0.9;
+}
+
+#buttons-container {
+  display: flex;
+  width: 70%;
+
+}
+
+#outputshare {
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+}
+
+
+#qrcode {
+  margin-top: 10px; /* Add margin between buttons and QR code */
+}
+
+#downloadBtn {
+  background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+#downloadBtn:hover, #downloadQR2:hover {
+  opacity: 0.9;
+}
+
+#buttondownloadQR{
+  background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  cursor: pointer;
+  margin-top: 20px;
+  width: 100%!important;
+}
+
+
+
+
+#outputshare a {
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-decoration: none;
+  color: #333;
+  font-size: 18px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+#outputshare p {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 0;
+}
+
+
+
+  /* public toggle */
+.toggle-container {
+  margin-top: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    -webkit-transition: .4s;
+    transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #77f2a1;
+}
+
+input:focus + .slider {
+    box-shadow: 0 0 1px #77f2a1;
+}
+
+input:checked + .slider:before {
+    -webkit-transform: translateX(26px);
+    -ms-transform: translateX(26px);
+    transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+
+
+
+#toggleText{
+
+  color: #1f2b37;
+}
+
+
+#previewcontainermobile{display: none;}
+#previewcontainer{display: block;}
+
+
+@media screen and (max-width: 767px) {
+
+  #previewcontainermobile{display: block;}
+  #previewcontainer{display: none;}
+  
+  .navdev {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    flex-direction: column;
+  }
+  
+  #devadmin {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between; /* Align items with space between them */
+    margin-top: 0px; /* Adjust margin as needed */
+    width: 100%;
+  }
+  
+  #headerlogodev {
+    margin: 0; /* Remove default margin */
+    background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+    -webkit-background-clip: text; /* WebKit/Blink browsers */
+    background-clip: text;
+    color: transparent; /* Hide the text color */
+    animation: gradientText 15s ease infinite;
+    font-size: 2em;
+  }
+  
+  #previewcontainermobile {
+    margin-top: 0px; /* Adjust as needed */
+    margin-right: auto; /* Push to the left */
+  
+  }
+  
+  #backbtndevtoolmobile {
+    background: none;
+    border: none;
+    margin-top: 0px;
+    cursor: pointer;
+  }
+  
+  #namepro {
+    margin-top: -40px; /* Adjust as needed */
+    margin-left: auto;
+    width: 80%;
+  }
+
+  #proname {
+    width: 95%;
+  }
+  
+  #buttonsaveproject {
+    margin-top: 35px; /* Adjust as needed */
+    margin-right: auto; /* Push buttonsaveproject to the left */
+  }
+  
+  .toggle-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end; /* Align toggle-container to the right */
+  }
+  
+  .switch {
+    margin-right: 10px; /* Add some spacing between switch and text */
+
+  }
+  
+  
+#aibuttonsend{
+
+  width: 90%;
+}
+
+
+
+#updateoutput{
+
+  width: 90%;
+}
+
+
+
+
+#changeai {
+  width: 90%;
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* home */
+
+.dividyfooter12 {
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  border-top: 2px solid rgba(255, 255, 255, 0.2);
+  margin: 0;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.footer-links {
+  margin-bottom: 10px;
+}
+
+.footer-links button {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.footer-links button:hover {
+  text-decoration: underline;
+}
+
+
+.copyright {
+  margin-top: 10px;
+}
+
+
+     #about-us-overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+      z-index: 9999;
+  }
+  
+  #about-us {
+
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: calc(100% - 40px);  
+
+
+  }
+  
+  /* Close button styling */
+  #closeaboutus {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+      color: #888;
+  }
+  
+  /* Title styling */
+  #about-us h2 {
+      color: #333;
+      font-size: 24px;
+      margin-bottom: 15px;
+      text-align: center;
+  }
+  
+
+  #logoaboutus{
+    background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+    -webkit-background-clip: text; /* WebKit/Blink browsers */
+    background-clip: text;
+    color: transparent; /* Hide the text color */
+    animation: gradientText 15s ease infinite;
+    font-size: 50px;
+    width:200px;
+  }
+  /* Paragraph styling */
+  #about-us p {
+      color: #666;
+      line-height: 1.5;
+      margin-bottom: 15px;
+  }
+
+
+  #privacy-policy-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+    z-index: 9999;
+    overflow-y: auto; /* Enable vertical scrolling */
+}
+
+#privacy-policy {
+    border-radius: 20px;
+    background-color: #fff;
+    padding: 20px;
+    width: 70%;
+    max-width: 600px;
+    position: absolute;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}
+
+/* Close button styling */
+#close-privacy-policy {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888;
+}
+
+/* Title styling */
+#privacy-policy h2 {
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+/* Paragraph and list styling */
+#privacy-policy p,
+#privacy-policy ul {
+    color: #666;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    font-size: 10.5px;
+}
+
+#privacy-policy ul {
+    margin-left: 20px;
+    font-size: 10.5px;
+
+}
+
+
+
+#terms-of-service-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent black overlay */
+  z-index: 9999;
+  overflow-y: auto; /* Enable vertical scrolling */
+}
+
+#terms-of-service {
+  border-radius: 20px;
+  background-color: #fff;
+  padding: 20px;
+  width: 70%;
+  max-width: 600px;
+  position: absolute;
+  top: 90%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2); /* Box shadow for depth */
+}
+
+/* Close button styling */
+#close-terms-of-service {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+}
+
+/* Title styling */
+#terms-of-service h2 {
+  color: #333;
+  font-size: 24px;
+  margin-bottom: 15px;
+}
+
+/* Paragraph and list styling */
+#terms-of-service p,
+#terms-of-service ul {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 15px;
+}
+
+#terms-of-service ul {
+  margin-left: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1; /* Adjust the z-index to ensure the overlay is on top of the content */
+}
+
+
+#posterthumbnails{
+
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  background-color: #FBFBFB;
+}
+
+
+.project-container {
+  position: relative;
+  margin: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 8px; /* Adds rounded corners */
+  overflow: hidden; /* Ensures content doesn't overflow with rounded corners */
+  transition: transform 0.3s ease-in-out; /* Adds a smooth transition effect */
+  font-family: 'Arial', sans-serif; /* Change the font to Arial or any other font you prefer */
+
+}
+
+.project-container:hover {
+  transform: scale(1.05); /* Enlarges the container on hover */
+}
+
+
+iframe{
+
+border: none;
+
+}
+
+
+
+.project-name {
+  color: #333; /* Change the color of the project name */
+  font-size: 20px; /* Adjust the font size for the project name */
+  margin: 10px 0; /* Add some margin for spacing */
+  text-align: center;
+  margin-left: 10px;
+}
+
+.user-name {
+  color: #999; /* Change the color of the user name */
+  font-size: 14px; /* Adjust the font size for the user name */
+  margin-bottom: 10px; /* Add margin at the bottom */
+  margin-left: 10px;
+
+}
+
+
+
+
+/* Header */
+
+
+
+/* Styling for the navigation */
+.nav {
+  width: 100%;
+  display: flex;
+  justify-content: space-between; /* Align items at the start and end of the flex container */
+  align-items: center; /* Center items vertically */
+  color: #000; /* Set text color to black */
+
+}
+
+
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content button {
+  width: 100%;
+  padding: 12px 16px;
+  text-align: left;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  border-radius: 50px;
+}
+
+.dropdown-content button:hover {
+  background-color: #ddd;
+}
+
+.navbuttons {
+  position: relative;
+  display: inline-block;
+
+}
+
+.navbuttonsbtn {
+  padding: 10px 20px;
+  background-color: #4f76f6;
+  color: #fff;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  border-radius: 50px;
+  margin-left: 10px;
+  display: none; /* Remove display none */
+}
+
+.navbuttonsbtn:hover {
+  background-color: #2858f7;
+  color: #fff;
+}
+
+
+
+#headerlogo{
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  color: transparent; /* Hide the text color */
+  animation: gradientText 15s ease infinite;
+  margin: 0; /* Remove default margin */
+  font-size: 2em;
+  margin-right: auto;
+  width: 150px;
+  cursor: pointer;
+}
+
+
+
+
+/* Sty/* Styling for the search input */
+#searchhp[type="text"] {
+  width: calc(100% - 80px); /* Adjust width to accommodate button */
+  padding: 10px;
+  border: none;
+  border-bottom: 2px solid grey; /* Green */
+  outline: none; /* Remove the default focus outline */
+  font-size: 16px;
+  background-color: transparent; /* Transparent background */
+  transition: border-bottom-color 0.3s; /* Smooth transition for border color */
+  margin-right: 10px;
+}
+
+.material-symbols-outlined {
+  margin-left: 10px; /* Adjust as needed */
+  font-size: 18px;
+  color: #666; /* Adjust color as needed */
+  font-variation-settings:
+      'FILL' 0,
+      'wght' 400,
+      'GRAD' 0,
+      'opsz' 24;
+}
+
+#searcharea {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+#searchhp {
+  flex: 1; /* Take up remaining space */
+}
+
+#searchButton {
+  padding: 10px 20px; /* Adjust padding as needed */
+  background-color: #4f76f6; /* Grey background color */
+  color: #fff; /* Black text color */
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s; /* Smooth transition for background color and text color */
+  border-radius: 50px;
+}
+
+#searchButton:hover {
+  background-color: #2858f7; /* Darker grey background color on hover */
+  color: #fff; /* White text color on hover */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Sign in page */
+
+
+
+
+
+
+#signupform{
+display: none;
+
+}
+
+
+
+#loginform{
+  display: none;
+  
+  }
+
+
+#resetform{
+
+  display: none;
+}
+
+
+#loginpage{
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+  #loginform {
+    border-radius: 8px;
+    padding: 40px;
+    width: 300px;
+    margin-top: -300px;
+  }
+  
+  
+  #loginform label {
+    display: block;
+    margin-bottom: 5px;
+    color: #1f2b37;
+  }
+  
+  #loginform input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 4px;
+    border: 1px solid #1f2b37;
+    margin-bottom: 20px;
+    font-size: 16px;
+    background-color: transparent;
+    color: #1f2b37;
+}
+
+/* Override autofill background color */
+#loginform input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Safari/Chrome autofill background color */
+    transition: background-color 5000s ease-in-out 0s; /* Safari/Chrome autofill transition */
+    -webkit-text-fill-color: #1f2b37 !important; /* Set text color to white */
+
+}
+
+
+  
+  #loginbtn {
+    background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+    background-size: 400% 400%;
+    animation: gradient 15s ease infinite;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+
+  
+  #signuplogin {
+    background: none;
+    border: none;
+   color: #1f2b37;
+    -webkit-background-clip: text; /* WebKit/Blink browsers */
+    background-clip: text;
+    animation: gradientText 15s ease infinite;    font-size: 14px;
+    cursor: pointer;
+  }
+  
+  #signuplogin:hover {
+    text-decoration: underline;
+  }
+
+
+  #loginbody {
+    background-color: #ffffff;
+  }
+  
+  @keyframes gradient {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+  
+  
+
+
+
+
+
+
+.navlogin {
+  width: 100%;
+  text-align: center;
+
+}
+
+#headerlogologin {
+  margin: 0; /* Remove default margin */
+  font-size: 5em;
+  background: linear-gradient(-45deg, #77f2a1, #4f76f6);
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  color: transparent; /* Hide the text color */
+  animation: gradientText 15s ease infinite;
+  width: 350px;
+}
+
+
+
+
+
+#signuppage{
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+
+
+#signupform {
+  border-radius: 8px;
+  padding: 40px;
+  width: 300px;
+  margin-top: -300px;
+}
+
+
+#signupform label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1f2b37;
+}
+
+#signupform input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #1f2b37;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #1f2b37;
+}
+
+/* Override autofill background color */
+#signupform input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Safari/Chrome autofill background color */
+  transition: background-color 5000s ease-in-out 0s; /* Safari/Chrome autofill transition */
+  -webkit-text-fill-color: #1f2b37 !important; /* Set text color to white */
+
+
+}
+
+
+
+  
+#signupbtn {
+  background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+
+  
+#loginlogin {
+  background: none;
+  border: none;
+color: #1f2b37;
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  animation: gradientText 15s ease infinite;    font-size: 14px;
+  cursor: pointer;
+}
+
+#loginlogin:hover {
+  text-decoration: underline;
+}
+
+
+
+#resetpage{
+
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+}
+
+
+
+#resetform {
+  border-radius: 8px;
+  padding: 40px;
+  width: 300px;
+  margin-top: -300px;
+}
+
+
+#resetform label {
+  display: block;
+  margin-bottom: 5px;
+  color: #1f2b37;
+}
+
+#resetform input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #1f2b37;
+  margin-bottom: 20px;
+  font-size: 16px;
+  background-color: transparent;
+  color: #1f2b37;
+}
+
+/* Override autofill background color */
+#resetform input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important; /* Safari/Chrome autofill background color */
+  transition: background-color 5000s ease-in-out 0s; /* Safari/Chrome autofill transition */
+  -webkit-text-fill-color: #1f2b37 !important; /* Set text color to white */
+
+
+}
+
+
+
+  
+#restbtn {
+  background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+
+#resetlogin {
+  background: none;
+  border: none;
+color: #1f2b37;
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  animation: gradientText 15s ease infinite;    font-size: 14px;
+  cursor: pointer;
+}
+
+#resetlogin:hover {
+  text-decoration: underline;
+}
+
+
+
+#forgotpass {
+  margin-top: 20px;
+  background: none;
+  border: none;
+color: #1f2b37;
+  -webkit-background-clip: text; /* WebKit/Blink browsers */
+  background-clip: text;
+  animation: gradientText 15s ease infinite;    font-size: 14px;
+  cursor: pointer;
+}
+
+#forgotpass:hover {
+  text-decoration: underline;
+}
+
+
+
+@keyframes gradientText {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+
+
+
+
+
+
+
+:root {
+    --hue: 223;
+    --bg: hsl(var(--hue),90%,95%);
+    --fg: hsl(var(--hue),90%,5%);
+    --trans-dur: 0.3s;
+}
+
+main {
+    padding: 1.5em 0;
+}
+.ip {
+    width: 16em;
+    height: 8em;
+}
+.ip__track {
+    stroke: hsl(var(--hue),90%,90%);
+    transition: stroke var(--trans-dur);
+}
+.ip__worm1,
+.ip__worm2 {
+    animation: worm1 2s linear infinite;
+}
+.ip__worm2 {
+    animation-name: worm2;
+}
+
+/* Dark theme */
+@media (prefers-color-scheme: dark) {
+    :root {
+        --bg: hsl(var(--hue),90%,5%);
+        --fg: hsl(var(--hue),90%,95%);
+    }
+    .ip__track {
+        stroke: hsl(var(--hue),90%,15%);
+    }
+}
+
+/* Animation */
+@keyframes worm1 {
+    from {
+        stroke-dashoffset: 0;
+    }
+    50% {
+        animation-timing-function: steps(1);
+        stroke-dashoffset: -358;
+    }
+    50.01% {
+        animation-timing-function: linear;
+        stroke-dashoffset: 358;
+    }
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+@keyframes worm2 {
+    from {
+        stroke-dashoffset: 358;
+    }
+    50% {
+        stroke-dashoffset: 0;
+    }
+    to {
+        stroke-dashoffset: -358;
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*Div-idy Shopping*/
+
+
+/* Styling for the homepage-shopping container to enable flexbox layout */
+#homepage-shopping {
+  display: flex;
+  flex-wrap: wrap; /* Allows the items to wrap onto the next line if the container is too small */
+  gap: 20px; /* Space between each category item */
+  justify-content: space-around; /* Distributes space around the items */
+  padding: 20px; /* Padding around the container */
+}
+
+/* Styling for each category item */
+.catagories-shopping {
+  background-color: white; /* Background color for each category box */
+  border-radius: 8px; /* Rounded corners */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  text-align: center; /* Center-aligns the text and icon */
+  width: 200px; /* Updated width for each category item */
+  padding: 30px 15px; /* Increased padding inside the category box */
+  display: flex;
+  flex-direction: column; /* Stacks children vertically */
+  justify-content: space-between; /* Ensures space between icon and text */
+  align-items: center; /* Center-aligns content horizontally */
+  height: 200px; /* Updated height to make each box larger */
+  transition: transform 0.2s; /* Smooth transition for hover effect */
+  cursor: pointer;
+}
+
+/* Color and position for the icons */
+.catagories-shopping .material-symbols-outlined {
+  font-size: 120px; /* Increased size of the icon */
+  color: #77f2a1; /* Icon color */
+  cursor: pointer;
+}
+
+/* Styling the text at the bottom */
+.catagories-shopping span + text {
+  margin-top: auto; /* Pushes the text to the bottom */
+  font-weight: bold; /* Makes the text bold */
+  cursor: pointer;
+}
+
+/* Hover effect for each category */
+.catagories-shopping:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+
+
+/*categories*/
+/* Style for the list of products container */
+.listofproducts {
+  display: flex; /* Use Flexbox layout */
+  flex-wrap: wrap; /* Allow items to wrap onto multiple lines */
+  gap: 20px; /* Space between items */
+  justify-content: center; /* Center items horizontally */
+  padding: 20px; /* Padding around the container */
+}
+
+/* Style for the product card container */
+.product-card {
+  background-color: #fff; /* White background for the product card */
+  border-radius: 8px; /* Rounded corners */
+  overflow: hidden; /* Hide overflow */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition */
+  max-width: 300px; /* Max width for the product card */
+  margin: 0; /* Remove default margin */
+  cursor: pointer; /* Pointer cursor on hover */
+  box-sizing: border-box; /* Include padding and border in element's total width and height */
+  height: 400px;
+}
+
+/* Style for the product image */
+.product-image {
+  width: 100%; /* Full width */
+  height: auto; /* Maintain aspect ratio */
+  display: block; /* Block-level element */
+}
+
+/* Style for the product title */
+.product-title {
+  font-size: 16px; /* Font size for the title */
+  font-weight: 600; /* Bold title */
+  color: #333; /* Dark gray color */
+  padding: 15px; /* Padding around the text */
+  margin: 0; /* Remove default margin */
+  text-align: center; /* Center align text */
+  text-decoration: none; /* Remove underline */
+}
+
+/* Remove underline from links */
+a {
+  text-decoration: none; /* Ensure no underline for all links */
+}
+
+/* Hover effect for the product card */
+.product-card:hover {
+  transform: scale(1.05); /* Slightly enlarge card on hover */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+}
+
+
+
+
+/*Product Page*/
+
+
+.back-button-container {
+  margin: 20px 0;
+}
+
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  padding: 10px 15px;
+  background: none;
+  color: #0073e6;
+  text-decoration: none;
+  border-radius: 5px;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.back-button:hover {
+  background-color: #005bb5;
+  color: #fff;
+}
+
+.back-button i {
+  margin-right: 8px; /* Space between icon and text */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+.container-propage {
+  width: 80%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 30px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  font-family: 'Roboto', Arial, sans-serif;
+}
+
+.propage-content {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: row;
+}
+
+.propage-image-container {
+  flex: 1;
+  margin: 20px;
+  text-align: center;
+}
+
+.propage-image {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.propage-image:hover {
+  transform: scale(1.05);
+}
+
+.propage-info-container {
+  flex: 2;
+  margin: 20px;
+}
+
+.propage-name {
+  font-size: 28px;
+  font-weight: bold;
+  margin: 20px 0;
+  color: #2d2d2d;
+}
+
+.propage-details {
+  margin: 20px 0;
+  color: #4d4d4d;
+  line-height: 1.6;
+}
+
+.button-container-propage {
+  text-align: center;
+  margin: 20px 0;
+  width: 100%;
+}
+
+.check-price-button-propage {
+  background-color: #4f76f6;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.check-price-button-propage:hover, .check-price-button-propage2:hover {
+  background-color: #0056b3;
+}
+
+.check-price-button-propage2 {
+  display: inline-block;
+  background-color: #4f76f6;
+  color: #fff;
+  padding: 15px 30px;
+  font-size: 18px;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+  width: 80%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  font-family: 'Roboto', Arial, sans-serif;
+
+}
+
+
+
+
+
+
+
+
+.recommendation-propage {
+  margin-top: 40px;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-left: 5px solid #4f76f6;
+  color: #333;
+  border-radius: 5px;
+}
+
+@media (max-width: 768px) {
+  .propage-content {
+      flex-direction: column;
+      align-items: center;
+  }
+  .propage-name {
+      text-align: center;
+  }
+  .propage-image-container {
+      order: -1; /* Move image to the top on mobile */
+  }
+}
+
+/*Pros and Cons*/
+
+/* General styling for the Pros and Cons section */
+.pros-cons-section {
+  width: 80%;
+  margin: 20px auto;
+  font-family: 'Roboto', Arial, sans-serif;
+  color: #333;
+  margin-top: 40px;
+}
+
+/* Styling for the title */
+.pros-cons-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #4f76f6; /* Blue color for the title */
+}
+
+/* Styling for the table */
+.pros-cons-table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.pros-cons-table th, .pros-cons-table td {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Styling for the table headers */
+.pros-cons-header {
+  background-color: #4f76f6; /* Blue background */
+  color: white;
+  padding: 15px;
+  text-align: center;
+  font-size: 18px;
+}
+
+/* Styling for the table body rows */
+.pros-cons-body tr:nth-child(even) {
+  background-color: #f8f8f8; /* Light grey for alternate rows */
+}
+
+.pros-cons-item {
+  padding: 12px 15px;
+  border-bottom: 1px solid #ddd; /* Border around cells */
+  vertical-align: top;
+}
+
+/* Hover effect for table rows */
+.pros-cons-body tr:hover {
+  background-color: #e6e6e6; /* Light grey background on hover */
+}
