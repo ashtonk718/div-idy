@@ -3,8 +3,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const OpenAI = require('openai');
 const path = require('path');
-const axios = require('axios');
-const cheerio = require('cheerio'); // Added for web scraping
+
+
 
 
 
@@ -31,7 +31,7 @@ const firebaseConfig = {
   app.get('/firebase-config', (req, res) => {
     // Check if the request has a referer header
     const referer = req.headers.referer;
-    if (referer && referer.includes('https://www.div-idy.com')) {
+    if (referer && referer.includes('http://div-idy.com')) {
         // Referer matches allowed URL, send Firebase config
         res.json(firebaseConfig);
     } else {
@@ -69,27 +69,11 @@ app.post("/getResponse", async (req, res) => { // Change to POST method
 
 
 
-// Serve static files from the 'public' directory
-app.use(express.static(path.join(__dirname, 'public')));
-
-// Handle requests with or without .html extension
-app.get('*', (req, res) => {
-  // Extract the requested path from the URL, including any subdirectories
-  const requestedPath = req.params[0] || ''; // req.params[0] captures the full path
-  const filePath = path.join(__dirname, 'public', requestedPath.endsWith('.html') ? requestedPath : `${requestedPath}.html`);
-
-  // Check if the file exists
-  res.sendFile(filePath, (err) => {
-    if (err) {
-      // If file is not found, send a 404 error
-      res.status(404).send('404 Not Found');
-    }
-  });
+// Handle requests without .html extension
+app.get('/:page', (req, res) => {
+  const page = req.params.page;
+  res.sendFile(path.join(__dirname, 'public', `${page}.html`));
 });
-
-
-
-
 
 
 
