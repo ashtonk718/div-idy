@@ -45,15 +45,17 @@ if (userDataString) {
             const userRef = ref(db, 'accounts/' + userid);
 
             get(userRef)
-                .then((snapshot) => {
-                    if (snapshot.exists()) {
-                        const userData = snapshot.val();
-                        localStorage.setItem('userData', JSON.stringify(userData));
-                        const displayName = userData.displayname;
-                        document.getElementById('displayname').innerHTML = "Welcome " + displayName;
-
-                        const projectsContainer = document.querySelector('.projects');
-
+            .then((snapshot) => {
+                if (snapshot.exists()) {
+                    const userData = snapshot.val();
+                    localStorage.setItem('userData', JSON.stringify(userData));
+                    const displayName = userData.displayname;
+                    document.getElementById('displayname').innerHTML = "Welcome " + displayName;
+        
+                    const projectsContainer = document.querySelector('.projects');
+        
+                    // Check if myprojects exists before proceeding
+                    if (userData.myprojects) {
                         // Convert myprojects into an array of objects with additional projectNumber property
                         const projectsArray = Object.keys(userData.myprojects).map(projectNumber => {
                             return {
@@ -61,87 +63,73 @@ if (userDataString) {
                                 projectData: userData.myprojects[projectNumber]
                             };
                         });
-
+        
                         // Sort projectsArray based on the lastsaved property
                         projectsArray.sort((a, b) => {
-                            // Convert last saved dates to Date objects
-                            const lastSavedA = a.projectData.lastsaved ? new Date(a.projectData.lastsaved) : new Date(0); // If undefined, use lowest possible date
-                            const lastSavedB = b.projectData.lastsaved ? new Date(b.projectData.lastsaved) : new Date(0); // If undefined, use lowest possible date
-                            return lastSavedB - lastSavedA; // Sort in descending order based on last saved date
+                            const lastSavedA = a.projectData.lastsaved ? new Date(a.projectData.lastsaved) : new Date(0);
+                            const lastSavedB = b.projectData.lastsaved ? new Date(b.projectData.lastsaved) : new Date(0);
+                            return lastSavedB - lastSavedA;
                         });
-
+        
                         // Iterate over sorted projectsArray and create a div for each project
                         projectsArray.forEach(project => {
-                          const projectNumber = project.projectNumber;
-                          const projectData = project.projectData;
-                      
-                          // Fetch publicviews data
-                          fetch('/firebase-config')
-                              .then(response => response.json())
-                              .then(data => {
-                                  const app = initializeApp(data);
-                                  const auth = getAuth(app);
-                                  const db = getDatabase(app);
-                                  const dbref = ref(db);
-                      
-                                  // Get publicviews from Firebase
-                                  get(child(dbref, 'public/' + projectNumber + "/"))
-                                      .then((snapshot) => {
-                                          let publicviews = 0; // Initialize publicviews
-                                          if (snapshot.exists()) {
-                                              publicviews = snapshot.val().views !== undefined ? snapshot.val().views : 0;
-                                          }
-                      
-                                          // Create project div with updated publicviews
-                                          const projectDiv = document.createElement('div');
-                                          projectDiv.classList.add('myaccountprojects');
-                                          projectDiv.innerHTML = `${projectData.projectname} <br> ID: ${projectNumber}<br> Views: ${publicviews} <br> Last Modified: ${projectData.lastsaved}<br><button id="deleteproject" class="delete-btn"><span class="material-symbols-outlined delete-icon">delete</span></button>`;
-                      
-                                          projectDiv.addEventListener('click', function () {
-                                              window.location.href = 'devtools?project=' + projectNumber;
-                                          });
-                      
-                                          // Add event listener to delete button
-                                          const deleteButton = projectDiv.querySelector('#deleteproject');
-                                          deleteButton.addEventListener('click', function (event) {
-                                              event.stopPropagation(); // Prevent the click event from triggering the project div's click event
-                                              // Delete the project from Firebase and refresh the page
-
-                                    document.getElementById("deleteprojectnamemodal-overlay").style.display = "block";
-
-
-                                    document.getElementById("deleteprojectbtn").addEventListener('click', function (event) {
-
-                                    event.stopPropagation();
-                                    deleteProject(projectNumber);
-
-                                    document.getElementById("deleteprojectnamemodal-overlay").style.display = "none";
-
-                                  });
-
-
-                                          });
-                      
-                                          projectsContainer.appendChild(projectDiv);
-                                          document.getElementById('loadingMessage').style.display = 'none';
-
-                                      })
-                                      .catch(error => {
-                                          console.error('Error getting publicviews:', error);
-                                      });
-                              })
-                              .catch(error => {
-                                  console.error('Error fetching Firebase configuration:', error);
-                              });
-                      });
-                      
+                            const projectNumber = project.projectNumber;
+                            const projectData = project.projectData;
+        
+                            fetch('/firebase-config')
+                                .then(response => response.json())
+                                .then(data => {
+                                    const app = initializeApp(data);
+                                    const db = getDatabase(app);
+                                    const dbref = ref(db);
+        
+                                    get(child(dbref, 'public/' + projectNumber + "/"))
+                                        .then((snapshot) => {
+                                            let publicviews = snapshot.exists() ? snapshot.val().views || 0 : 0;
+        
+                                            const projectDiv = document.createElement('div');
+                                            projectDiv.classList.add('myaccountprojects');
+                                            projectDiv.innerHTML = `${projectData.projectname} <br> ID: ${projectNumber}<br> Views: ${publicviews} <br> Last Modified: ${projectData.lastsaved}<br><button id="deleteproject" class="delete-btn"><span class="material-symbols-outlined delete-icon">delete</span></button>`;
+        
+                                            projectDiv.addEventListener('click', function () {
+                                                window.location.href = 'devtools?project=' + projectNumber;
+                                            });
+        
+                                            const deleteButton = projectDiv.querySelector('#deleteproject');
+                                            deleteButton.addEventListener('click', function (event) {
+                                                event.stopPropagation();
+                                                document.getElementById("deleteprojectnamemodal-overlay").style.display = "block";
+                                                document.getElementById("deleteprojectbtn").addEventListener('click', function (event) {
+                                                    event.stopPropagation();
+                                                    deleteProject(projectNumber);
+                                                    document.getElementById("deleteprojectnamemodal-overlay").style.display = "none";
+                                                });
+                                            });
+        
+                                            projectsContainer.appendChild(projectDiv);
+                                            document.getElementById('loadingMessage').style.display = 'none';
+                                        })
+                                        .catch(error => {
+                                            console.error('Error getting publicviews:', error);
+                                        });
+                                })
+                                .catch(error => {
+                                    console.error('Error fetching Firebase configuration:', error);
+                                });
+                        });
                     } else {
-                        console.log("User data not found.");
+                        // If no projects, clear loading message and show a placeholder message
+                        document.getElementById('loadingMessage').style.display = 'none';
+                        projectsContainer.appendChild = "<p>No projects found. Start by creating a new project!</p>";
                     }
-                })
-                .catch((error) => {
-                    console.error("Error fetching user data:", error.message);
-                });
+                } else {
+                    console.log("User data not found.");
+                }
+            })
+            .catch((error) => {
+                console.error("Error fetching user data:", error.message);
+            });
+        
         })
         .catch(error => {
             console.error('Error fetching Firebase configuration:', error);
