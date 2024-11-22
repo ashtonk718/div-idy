@@ -53,7 +53,7 @@ app.post("/getResponse", async (req, res) => { // Change to POST method
   try {
     const completion = await openai.chat.completions.create({
       messages: [{ role: "system", content: aiinput }],
-      model: "gpt-3.5-turbo",
+      model: "gpt-4o-mini",
     });
 
     const htmlCode = completion.choices[0]; // Extract HTML code from completion
