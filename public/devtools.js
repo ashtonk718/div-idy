@@ -614,7 +614,10 @@ function aiproject() {
         }
     
         const airesponse = data.content.replace(/\\n/g, '\n'); 
-    
+
+console.log("response" + airesponse)
+
+        
         const htmlStartIndex = airesponse.indexOf("```html");
         const cssStartIndex = airesponse.indexOf("```css");
         const jsStartIndex = airesponse.indexOf("```javascript");
