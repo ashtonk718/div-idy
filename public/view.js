@@ -271,6 +271,18 @@ console.log(`Meta tag for 'og:url' updated to: ${currentUrl}`);
 
 
 
+// Sizing the iframe
+setTimeout(() => {
+  // Calculate the content height
+  const contentHeight = outputDocument.documentElement.scrollHeight;
+
+  // Set the height to the larger of the content height or 700px
+  outputFrame.style.height = Math.max(contentHeight, 700) + 'px';
+}, 100); // Adjust the timeout duration if needed
+
+
+
+
           } else {
             console.log('No data available');
           }
@@ -469,3 +481,6 @@ webexperienceElement.addEventListener('animationiteration', changeWord);
 
 // Set initial word
 changeWord();
+
+
+

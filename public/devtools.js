@@ -17,6 +17,8 @@ import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/fireb
 const projecturl = new URLSearchParams(window.location.search).get('project');
 console.log(projecturl);
 
+// Set the 'projecturl' value in local storage with the key 'project'
+localStorage.setItem('project', projecturl);
 
 
 const userDataString = localStorage.getItem('userData');
@@ -252,6 +254,7 @@ const dateTimeString = dateString + " " + timeString;
 function previewproject (){
 
 
+  document.getElementById('loadingMessage').style.display = 'block';
 
 
 
@@ -261,18 +264,6 @@ function previewproject (){
 
   
 
-  document.getElementById("codeoutputpreview").style.display = "block";
-  
-  // Get the window height
-  var windowHeight = window.innerHeight;
-  
-  // Calculate the desired height for the iframe
-  var iframeHeight = windowHeight - 150;
-  
-  // Set the height of the iframe
-  document.getElementById('outputiframepreview').style.height = iframeHeight + 'px';
-  
-
 
 
   
@@ -280,26 +271,22 @@ function previewproject (){
 
 
 
-  //preview code 
-
-  const htmlCodeupdate =  document.getElementById('html-input').value
-  const cssCodeupdate  = document.getElementById('css-input').value 
-  const  jsCodeupdate  = document.getElementById('js-input').value  
-  
-      const outputFrame = document.getElementById('outputiframepreview');
-  
-   
-  
-      // Access the contentDocument property directly
-      const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
-  
-
 
   
-      outputDocument.open();
-      outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
-      outputDocument.close();
   
+  
+    //preview info 
+
+    const htmlCodeupdate =  document.getElementById('html-input').value
+    const cssCodeupdate  = document.getElementById('css-input').value 
+    const  jsCodeupdate  = document.getElementById('js-input').value  
+    
+    localStorage.setItem('projecthtml', htmlCodeupdate);
+    localStorage.setItem('projectcss', cssCodeupdate);
+    localStorage.setItem('projectjs', jsCodeupdate);
+     
+    
+
   
 
 
@@ -412,12 +399,22 @@ function previewproject (){
           console.error('Error fetching Firebase configuration:', error);
         });
       
-        document.getElementById("updateoutput").textContent="Back to Editor"
+
+
+
+        setTimeout(() => {        
+document.getElementById("updateoutput").textContent="Back to Editor"
+const projectname = localStorage.getItem('project')
+window.location.href = 'devtoolspreview?preview=' + projectname
+document.getElementById('loadingMessage').style.display = 'none';
+
+
+}, 700);
+
 
       } else {
         document.getElementById("updateoutput").textContent="Preview"
 
-        closemodal ()
 
 
       }
@@ -702,35 +699,10 @@ function goback (){
 
 
 
-  function closemodal (){
-    
-
-    document.getElementById("codeoutputpreview").style.display = "none";
-
-    document.getElementById("updateoutput").textContent="Preview"  
-   
-
-
-    }
   
-    closepreview.addEventListener('click', closemodal);
 
 
 
-    function changedevice() {
-      var deviceButton = document.getElementById("devicepreview");
-      if (deviceButton.innerHTML.includes("smartphone")) {
-          deviceButton.innerHTML = '<span class="material-symbols-outlined">computer</span>';
-          document.getElementById("outputiframepreview").style.width = "411px";
-      } else {
-          deviceButton.innerHTML = '<span class="material-symbols-outlined">smartphone</span>';
-          document.getElementById("outputiframepreview").style.width = "100%";
-      }
-  }
-  
-  document.getElementById("devicepreview").addEventListener('click', changedevice);
-  
-    
 
 
     localStorage.removeItem("firebase:host:webbuilder-b3a38-default-rtdb.firebaseio.com");
