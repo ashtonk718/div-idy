@@ -440,3 +440,4 @@ aboutusfooter.addEventListener('click', openaboutus);
                             }
                         }
 myaccoutfooter.addEventListener('click', myaccoutfooterclick);
+

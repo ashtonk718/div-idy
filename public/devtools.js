@@ -97,15 +97,6 @@ toggleSwitch.addEventListener('change', function () {
 
 
 
-const outputFrame = document.getElementById('outputiframepreview');
-
-// Access the contentDocument property directly
-const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
-
-outputDocument.open();
-outputDocument.write(`${htmlCode}<style>${cssCode}</style><script>${jsCode}</script>`);
-outputDocument.close();
-
 
                 
               } else {
@@ -236,18 +227,8 @@ const dateTimeString = dateString + " " + timeString;
           
           });}
 
-    const htmlCodeupdate =  document.getElementById('html-input').value
-    const cssCodeupdate  = document.getElementById('css-input').value 
-    const  jsCodeupdate  = document.getElementById('js-input').value  
 
-        const outputFrame = document.getElementById('outputiframepreview');
 
-        // Access the contentDocument property directly
-        const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
-        
-        outputDocument.open();
-        outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
-        outputDocument.close();
 
 
 
@@ -270,6 +251,10 @@ const dateTimeString = dateString + " " + timeString;
 
 function previewproject (){
 
+
+
+
+
   updateLabel();
 
  if(document.getElementById("updateoutput").textContent=="Preview") {
@@ -287,7 +272,48 @@ function previewproject (){
   // Set the height of the iframe
   document.getElementById('outputiframepreview').style.height = iframeHeight + 'px';
   
+
+
+
   
+  
+
+
+
+  //preview code 
+
+  const htmlCodeupdate =  document.getElementById('html-input').value
+  const cssCodeupdate  = document.getElementById('css-input').value 
+  const  jsCodeupdate  = document.getElementById('js-input').value  
+  
+      const outputFrame = document.getElementById('outputiframepreview');
+  
+   
+  
+      // Access the contentDocument property directly
+      const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+  
+
+
+  
+      outputDocument.open();
+      outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
+      outputDocument.close();
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
   
     fetch('/firebase-config')
     .then(response => response.json())
@@ -297,7 +323,7 @@ function previewproject (){
       const auth = getAuth(app);
       const db = getDatabase(app);
   
-  
+ //Save to private database 
   
   console.log(db, 'accounts/' + userData.useridnumber + "/myprojects/" + projecturl + "/")
   
@@ -332,10 +358,18 @@ function previewproject (){
           
           
           });
+
+
+
+
+
+
+
+
   
 
 
-
+//Save to Public Database
           const toggleText = document.getElementById('toggleText');
           if (toggleText.textContent == "Public"){
   
@@ -366,19 +400,10 @@ function previewproject (){
             
             });}
   
-  
-      const htmlCodeupdate =  document.getElementById('html-input').value
-      const cssCodeupdate  = document.getElementById('css-input').value 
-      const  jsCodeupdate  = document.getElementById('js-input').value  
-  
-          const outputFrame = document.getElementById('outputiframepreview');
-  
-          // Access the contentDocument property directly
-          const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
-          
-          outputDocument.open();
-          outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
-          outputDocument.close();
+      
+
+
+   
   
   
 
@@ -563,9 +588,9 @@ function aiproject() {
   if (document.getElementById('changeai').value !== "") {
     let aiinput;
     if (document.getElementById('html-input').value !== "") {
-      aiinput = "HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response";
+      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. Here is the current code: HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
     } else {
-      aiinput = "I want the full code only!! I need the full html css and js code to create a website where " + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images divide the code by ```html ```css ```javascript and only give me the code in the response";
+      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. I want the full code only!! I need the full html css and js code to create a webpage, the following is the prompt from the user" + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images and divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
     }
 
 
@@ -576,40 +601,46 @@ function aiproject() {
 
     document.getElementById('loadingMessage').style.display = 'block';
 
-    // Make a POST request to the server
     fetch('/getResponse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ aiinput: aiinput }) // Send the input to the server
+      body: JSON.stringify({ aiinput: aiinput })
     })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-      document.getElementById('loadingMessage').style.display = 'none';
-
-      const airesponse = data.message.content.replace(/\\n/g, '\n'); // Extract HTML code and replace newline characters
-
-      // Find the indexes where each code block starts and ends
-      const htmlStartIndex = airesponse.indexOf("```html");
-      const cssStartIndex = airesponse.indexOf("```css");
-      const jsStartIndex = airesponse.indexOf("```javascript");
-
-      const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
-      const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
-
-      const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
-      const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
-      const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
-
-      // Populate text boxes with typing effect
-      const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
-      const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
-      const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
-
-      Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
-    })
-    .catch(error => console.error('Error:', error));
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById('loadingMessage').style.display = 'none';
+    
+        if (!data.content) {
+          throw new Error("AI response content is empty or undefined");
+        }
+    
+        const airesponse = data.content.replace(/\\n/g, '\n'); 
+    
+        const htmlStartIndex = airesponse.indexOf("```html");
+        const cssStartIndex = airesponse.indexOf("```css");
+        const jsStartIndex = airesponse.indexOf("```javascript");
+    
+        const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
+        const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
+    
+        const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
+        const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
+        const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
+    
+        // Populate text boxes with typing effect
+        const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
+        const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
+        const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
+    
+        Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        alert("An error occurred: " + error.message); // Inform the user of the issue
+      });
+    
 
     document.getElementById('changeai').value = "";
   } else {
@@ -672,11 +703,13 @@ function goback (){
 
 
   function closemodal (){
-
+    
 
     document.getElementById("codeoutputpreview").style.display = "none";
 
-    document.getElementById("updateoutput").textContent="Preview"
+    document.getElementById("updateoutput").textContent="Preview"  
+   
+
 
     }
   

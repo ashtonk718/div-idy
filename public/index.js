@@ -18,6 +18,7 @@ function gotosignup (){
 
 loginhome.addEventListener('click', gotologin);
 signuphome.addEventListener('click', gotosignup);
+titlepromotion.addEventListener('click', gotosignup);
 
 
 
@@ -70,10 +71,15 @@ function onPageLoad(db) {
         document.getElementById('accountbtn').textContent = username;
         document.getElementById('loginhome').style.display = "none";
         document.getElementById('signuphome').style.display = "none";
+        document.getElementById('titlepromotion').style.display = "none";
+
     } else {
         document.getElementById('accountbtn').style.display = "none";
         document.getElementById('loginhome').style.display = "inline-block";
         document.getElementById('signuphome').style.display = "inline-block";
+        document.getElementById('titlepromotion').style.display = "block";
+
+        
     }
 
     const projectsRef = ref(db, 'public'); // Reference to the 'public' folder in Firebase
@@ -484,3 +490,35 @@ aboutusfooter.addEventListener('click', openaboutus);
                             }
                         }
 myaccoutfooter.addEventListener('click', myaccoutfooterclick);
+
+
+
+
+
+
+//Promotion header
+ // List of words to cycle through
+ const words = [
+    "Webpage",
+    "Video Game",
+    "Digital Resume",
+    "Portfolio",
+    "Blog",
+    "Prank Website",
+    "Lesson Display"
+  ];
+
+  const webexperienceElement = document.getElementById("webexperience");
+
+  let wordIndex = 0;
+
+  function changeWord() {
+    webexperienceElement.textContent = words[wordIndex];
+    wordIndex = (wordIndex + 1) % words.length;
+  }
+
+  // Change word right when it's fully visible
+  webexperienceElement.addEventListener('animationiteration', changeWord);
+
+  // Set initial word
+  changeWord();

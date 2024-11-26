@@ -929,8 +929,89 @@ input:checked + .slider:before {
 
 
 
-
 /* home */
+
+  /* General styles */
+  #titlepromotion {
+    font-family: 'Arial', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: #4f76f6;
+    text-align: center;
+    padding: 10px 20px;
+    border: 2px solid #77f2a1;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    white-space: nowrap;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+  }
+
+  @media screen and (max-width: 767px) {
+    #titlepromotion {
+      font-size: 16px;
+    }
+  }
+
+  /* Container for the dynamic text */
+  #webexperience-container {
+    display: inline-block;
+    position: relative;
+    width: 170px;
+    text-align: center;
+    background-color: #77f2a1;
+    border-radius: 10px;
+    overflow: hidden;
+    margin-bottom: -5px;
+  }
+
+  /* Decorative line effect */
+  #webexperience-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background-color: #4f76f6;
+    z-index: -1;
+  }
+
+  /* Dynamic text styling */
+  #webexperience {
+    display: inline-block;
+    color: #ffffff;
+    font-style: italic;
+    padding: 0 5px;
+    border-radius: 5px;
+    animation: slideInOut 1.5s ease-in-out infinite;
+  }
+
+  /* Slide in and out animation */
+  @keyframes slideInOut {
+    0%, 20% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    30%, 70% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    80%, 100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+
+
+
+
+
+
+
+
+
 
 .dividyfooter12 {
   background: linear-gradient(-45deg, #77f2a1, #4f76f6);
@@ -1190,7 +1271,7 @@ input:checked + .slider:before {
   overflow: hidden; /* Ensures content doesn't overflow with rounded corners */
   transition: transform 0.3s ease-in-out; /* Adds a smooth transition effect */
   font-family: 'Arial', sans-serif; /* Change the font to Arial or any other font you prefer */
-
+cursor: pointer;
 }
 
 .project-container:hover {
