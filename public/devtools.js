@@ -17,8 +17,6 @@ import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/fireb
 const projecturl = new URLSearchParams(window.location.search).get('project');
 console.log(projecturl);
 
-// Set the 'projecturl' value in local storage with the key 'project'
-localStorage.setItem('project', projecturl);
 
 
 const userDataString = localStorage.getItem('userData');
@@ -98,6 +96,15 @@ toggleSwitch.addEventListener('change', function () {
 
 
 
+
+const outputFrame = document.getElementById('outputiframepreview');
+
+// Access the contentDocument property directly
+const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+
+outputDocument.open();
+outputDocument.write(`${htmlCode}<style>${cssCode}</style><script>${jsCode}</script>`);
+outputDocument.close();
 
 
                 
@@ -229,8 +236,18 @@ const dateTimeString = dateString + " " + timeString;
           
           });}
 
+    const htmlCodeupdate =  document.getElementById('html-input').value
+    const cssCodeupdate  = document.getElementById('css-input').value 
+    const  jsCodeupdate  = document.getElementById('js-input').value  
 
+        const outputFrame = document.getElementById('outputiframepreview');
 
+        // Access the contentDocument property directly
+        const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+        
+        outputDocument.open();
+        outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
+        outputDocument.close();
 
 
 
@@ -253,54 +270,24 @@ const dateTimeString = dateString + " " + timeString;
 
 function previewproject (){
 
-
-  document.getElementById('loadingMessage').style.display = 'block';
-
-
-
   updateLabel();
 
  if(document.getElementById("updateoutput").textContent=="Preview") {
 
   
 
-
-
+  document.getElementById("codeoutputpreview").style.display = "block";
+  
+  // Get the window height
+  var windowHeight = window.innerHeight;
+  
+  // Calculate the desired height for the iframe
+  var iframeHeight = windowHeight - 150;
+  
+  // Set the height of the iframe
+  document.getElementById('outputiframepreview').style.height = iframeHeight + 'px';
   
   
-
-
-
-
-  
-  
-  
-    //preview info 
-
-    const htmlCodeupdate =  document.getElementById('html-input').value
-    const cssCodeupdate  = document.getElementById('css-input').value 
-    const  jsCodeupdate  = document.getElementById('js-input').value  
-    
-    localStorage.setItem('projecthtml', htmlCodeupdate);
-    localStorage.setItem('projectcss', cssCodeupdate);
-    localStorage.setItem('projectjs', jsCodeupdate);
-     
-    
-
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
   
     fetch('/firebase-config')
     .then(response => response.json())
@@ -310,7 +297,7 @@ function previewproject (){
       const auth = getAuth(app);
       const db = getDatabase(app);
   
- //Save to private database 
+  
   
   console.log(db, 'accounts/' + userData.useridnumber + "/myprojects/" + projecturl + "/")
   
@@ -345,18 +332,10 @@ function previewproject (){
           
           
           });
-
-
-
-
-
-
-
-
   
 
 
-//Save to Public Database
+
           const toggleText = document.getElementById('toggleText');
           if (toggleText.textContent == "Public"){
   
@@ -387,10 +366,19 @@ function previewproject (){
             
             });}
   
-      
-
-
-   
+  
+      const htmlCodeupdate =  document.getElementById('html-input').value
+      const cssCodeupdate  = document.getElementById('css-input').value 
+      const  jsCodeupdate  = document.getElementById('js-input').value  
+  
+          const outputFrame = document.getElementById('outputiframepreview');
+  
+          // Access the contentDocument property directly
+          const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+          
+          outputDocument.open();
+          outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
+          outputDocument.close();
   
   
 
@@ -399,22 +387,12 @@ function previewproject (){
           console.error('Error fetching Firebase configuration:', error);
         });
       
-
-
-
-        setTimeout(() => {        
-document.getElementById("updateoutput").textContent="Back to Editor"
-const projectname = localStorage.getItem('project')
-window.location.href = 'devtoolspreview?preview=' + projectname
-document.getElementById('loadingMessage').style.display = 'none';
-
-
-}, 700);
-
+        document.getElementById("updateoutput").textContent="Back to Editor"
 
       } else {
         document.getElementById("updateoutput").textContent="Preview"
 
+        closemodal ()
 
 
       }
@@ -585,9 +563,9 @@ function aiproject() {
   if (document.getElementById('changeai').value !== "") {
     let aiinput;
     if (document.getElementById('html-input').value !== "") {
-      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. Here is the current code: HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
+      aiinput = "HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response";
     } else {
-      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. I want the full code only!! I need the full html css and js code to create a webpage, the following is the prompt from the user" + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images and divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
+      aiinput = "I want the full code only!! I need the full html css and js code to create a website where " + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images divide the code by ```html ```css ```javascript and only give me the code in the response";
     }
 
 
@@ -598,49 +576,40 @@ function aiproject() {
 
     document.getElementById('loadingMessage').style.display = 'block';
 
+    // Make a POST request to the server
     fetch('/getResponse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ aiinput: aiinput })
+      body: JSON.stringify({ aiinput: aiinput }) // Send the input to the server
     })
-      .then(response => response.json())
-      .then(data => {
-        document.getElementById('loadingMessage').style.display = 'none';
-    
-        if (!data.content) {
-          throw new Error("AI response content is empty or undefined");
-        }
-    
-        const airesponse = data.content.replace(/\\n/g, '\n'); 
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+      document.getElementById('loadingMessage').style.display = 'none';
 
-console.log("response" + airesponse)
+      const airesponse = data.message.content.replace(/\\n/g, '\n'); // Extract HTML code and replace newline characters
 
-        
-        const htmlStartIndex = airesponse.indexOf("```html");
-        const cssStartIndex = airesponse.indexOf("```css");
-        const jsStartIndex = airesponse.indexOf("```javascript");
-    
-        const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
-        const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
-    
-        const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
-        const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
-        const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
-    
-        // Populate text boxes with typing effect
-        const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
-        const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
-        const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
-    
-        Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert("An error occurred: " + error.message); // Inform the user of the issue
-      });
-    
+      // Find the indexes where each code block starts and ends
+      const htmlStartIndex = airesponse.indexOf("```html");
+      const cssStartIndex = airesponse.indexOf("```css");
+      const jsStartIndex = airesponse.indexOf("```javascript");
+
+      const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
+      const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
+
+      const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
+      const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
+      const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
+
+      // Populate text boxes with typing effect
+      const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
+      const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
+      const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
+
+      Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
+    })
+    .catch(error => console.error('Error:', error));
 
     document.getElementById('changeai').value = "";
   } else {
@@ -702,10 +671,33 @@ function goback (){
 
 
 
+  function closemodal (){
+
+
+    document.getElementById("codeoutputpreview").style.display = "none";
+
+    document.getElementById("updateoutput").textContent="Preview"
+
+    }
   
+    closepreview.addEventListener('click', closemodal);
 
 
 
+    function changedevice() {
+      var deviceButton = document.getElementById("devicepreview");
+      if (deviceButton.innerHTML.includes("smartphone")) {
+          deviceButton.innerHTML = '<span class="material-symbols-outlined">computer</span>';
+          document.getElementById("outputiframepreview").style.width = "411px";
+      } else {
+          deviceButton.innerHTML = '<span class="material-symbols-outlined">smartphone</span>';
+          document.getElementById("outputiframepreview").style.width = "100%";
+      }
+  }
+  
+  document.getElementById("devicepreview").addEventListener('click', changedevice);
+  
+    
 
 
     localStorage.removeItem("firebase:host:webbuilder-b3a38-default-rtdb.firebaseio.com");
