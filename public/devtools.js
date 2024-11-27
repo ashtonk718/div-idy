@@ -558,17 +558,15 @@ if (toggleText.textContent == "Public"){
 aibuttonsend.addEventListener('click', aiproject);
 
 
-
-
 function aiproject() {
   document.getElementById("aierror").innerHTML = "";
 
   if (document.getElementById('changeai').value !== "") {
     let aiinput;
     if (document.getElementById('html-input').value !== "") {
-      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. Here is the current code: HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
+      aiinput = "HTML: " + document.getElementById('html-input').value + " CSS: " + document.getElementById('css-input').value + " JS: " + document.getElementById('js-input').value + " Take this code and make these changes " + document.getElementById('changeai').value + " I need the full html css and js code. divide the code by ```html ```css ```javascript and only give me the code in the response";
     } else {
-      aiinput = "You are a web developer for a web service where your code is put into an iframe on a website. I want the full code only!! I need the full html css and js code to create a webpage, the following is the prompt from the user" + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images and divide the code by ```html ```css ```javascript and only give me the code in the response. In the html add this in the header for set purpose <meta name=description content=> and <meta name=keywords content=>";
+      aiinput = "I want the full code only!! I need the full html css and js code to create a website where " + document.getElementById('changeai').value + " I need the full html css and js code for this webpage. Don't add any images divide the code by ```html ```css ```javascript and only give me the code in the response";
     }
 
 
@@ -585,45 +583,42 @@ function aiproject() {
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ aiinput: aiinput })// Send the input to the server
+      body: JSON.stringify({ aiinput: aiinput }) // Send the input to the server
     })
-      .then(response => response.json())// Parse the response as JSON
-      .then(data => {
-        document.getElementById('loadingMessage').style.display = 'none';
-    
-        const airesponse = data.content.replace(/\\n/g, '\n'); 
-    
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+      document.getElementById('loadingMessage').style.display = 'none';
 
+      const airesponse = data.message.content.replace(/\\n/g, '\n'); // Extract HTML code and replace newline characters
 
-        const htmlStartIndex = airesponse.indexOf("```html");
-        const cssStartIndex = airesponse.indexOf("```css");
-        const jsStartIndex = airesponse.indexOf("```javascript");
-    
-        const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
-        const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
-    
-        const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
-        const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
-        const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
-    
-        // Populate text boxes with typing effect
-        const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
-        const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
-        const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
-    
-        Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert("An error occurred: " + error.message); // Inform the user of the issue
-      });
-    
+      // Find the indexes where each code block starts and ends
+      const htmlStartIndex = airesponse.indexOf("```html");
+      const cssStartIndex = airesponse.indexOf("```css");
+      const jsStartIndex = airesponse.indexOf("```javascript");
+
+      const htmlEndIndex = cssStartIndex !== -1 ? cssStartIndex : jsStartIndex;
+      const cssEndIndex = jsStartIndex !== -1 ? jsStartIndex : airesponse.length;
+
+      const htmlCode = airesponse.substring(htmlStartIndex, htmlEndIndex).trim().replace(/```html/g, '').replace(/```/g, '').trim();
+      const cssCode = airesponse.substring(cssStartIndex, cssEndIndex).trim().replace(/```css/g, '').replace(/```/g, '').trim();
+      const jsCode = airesponse.substring(jsStartIndex).trim().replace(/```javascript/g, '').replace(/```/g, '').trim();
+
+      // Populate text boxes with typing effect
+      const htmlTyping = populateTextBoxWithTypingEffect('html-input', htmlCode, 1);
+      const cssTyping = populateTextBoxWithTypingEffect('css-input', cssCode, 1);
+      const jsTyping = populateTextBoxWithTypingEffect('js-input', jsCode, 1);
+
+      Promise.all([htmlTyping, cssTyping, jsTyping]).then(previewproject);
+    })
+    .catch(error => console.error('Error:', error));
 
     document.getElementById('changeai').value = "";
   } else {
     document.getElementById("aierror").innerHTML = "<p style='text-align: center; color: red;'>You need to enter what you would like us to do for you</p>";
   }
 }
+
+
 
 // Function to simulate typing effect
 function typeText(element, text, index, delay) {
@@ -675,6 +670,29 @@ function goback (){
 
   backbtndevtool.addEventListener('click', goback);
   backbtndevtoolmobile.addEventListener('click', goback);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
