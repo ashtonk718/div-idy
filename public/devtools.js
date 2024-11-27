@@ -239,18 +239,18 @@ const dateTimeString = dateString + " " + timeString;
           
           });}
 
-          const htmlCodeupdate =  document.getElementById('html-input').value
-          const cssCodeupdate  = document.getElementById('css-input').value 
-          const  jsCodeupdate  = document.getElementById('js-input').value  
-      
-              const outputFrame = document.getElementById('outputiframepreview');
-      
-              // Access the contentDocument property directly
-              const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
-              
-              outputDocument.open();
-              outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
-              outputDocument.close();
+       
+          
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -273,49 +273,19 @@ const dateTimeString = dateString + " " + timeString;
 
 function previewproject (){
 
-
-  document.getElementById('loadingMessage').style.display = 'block';
-
-
-
   updateLabel();
 
- if(document.getElementById("updateoutput").textContent=="Preview") {
-
-  
+if(document.getElementById("updateoutput").textContent=="Preview") {
 
 
 
-  
-  
+document.getElementById('loadingMessage').style.display = 'block';
+
 
 
 
 
   
-  
-  
-    //preview info 
-
-    const htmlCodeupdate =  document.getElementById('html-input').value
-    const cssCodeupdate  = document.getElementById('css-input').value 
-    const  jsCodeupdate  = document.getElementById('js-input').value  
-    
-    localStorage.setItem('projecthtml', htmlCodeupdate);
-    localStorage.setItem('projectcss', cssCodeupdate);
-    localStorage.setItem('projectjs', jsCodeupdate);
-     
-    
-
-  
-
-
-
-
-
-
-
-
 
 
 
@@ -368,14 +338,6 @@ function previewproject (){
 
 
 
-
-
-
-
-
-  
-
-
 //Save to Public Database
           const toggleText = document.getElementById('toggleText');
           if (toggleText.textContent == "Public"){
@@ -408,40 +370,39 @@ function previewproject (){
             });}
   
       
+    //preview info 
 
+    const htmlCodeupdate =  document.getElementById('html-input').value
+    const cssCodeupdate  = document.getElementById('css-input').value 
+    const  jsCodeupdate  = document.getElementById('js-input').value  
+    
+    localStorage.setItem('projecthtml', htmlCodeupdate);
+    localStorage.setItem('projectcss', cssCodeupdate);
+    localStorage.setItem('projectjs', jsCodeupdate);
 
    
   
   
 
-        })
+        
+  })
         .catch(error => {
           console.error('Error fetching Firebase configuration:', error);
         });
-      
+    
 
-
-
-        setTimeout(() => {        
+setTimeout(() => {        
 document.getElementById("updateoutput").textContent="Back to Editor"
 const projectname = localStorage.getItem('project')
 window.location.href = 'devtoolspreview?preview=' + projectname
 document.getElementById('loadingMessage').style.display = 'none';
 
-
 }, 700);
-
 
       } else {
         document.getElementById("updateoutput").textContent="Preview"
-
-
-
+        closemodal ()
       }
-
-
-
-
 
 
   }
@@ -618,20 +579,17 @@ function aiproject() {
 
     document.getElementById('loadingMessage').style.display = 'block';
 
+    // Make a POST request to the server
     fetch('/getResponse', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ aiinput: aiinput })
+      body: JSON.stringify({ aiinput: aiinput })// Send the input to the server
     })
-      .then(response => response.json())
+      .then(response => response.json())// Parse the response as JSON
       .then(data => {
         document.getElementById('loadingMessage').style.display = 'none';
-    
-        if (!data.content) {
-          throw new Error("AI response content is empty or undefined");
-        }
     
         const airesponse = data.content.replace(/\\n/g, '\n'); 
     
