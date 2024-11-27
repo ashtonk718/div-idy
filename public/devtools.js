@@ -17,8 +17,7 @@ import { getDatabase, ref, get, child, set } from "https://www.gstatic.com/fireb
 const projecturl = new URLSearchParams(window.location.search).get('project');
 console.log(projecturl);
 
-// Set the 'projecturl' value in local storage with the key 'project'
-localStorage.setItem('project', projecturl);
+
 
 
 const userDataString = localStorage.getItem('userData');
