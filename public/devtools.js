@@ -588,6 +588,7 @@ function aiproject() {
     .then(response => response.json()) // Parse the response as JSON
     .then(data => {
       document.getElementById('loadingMessage').style.display = 'none';
+      console.log('Response:', data);
 
       const airesponse = data.message.content.replace(/\\n/g, '\n'); // Extract HTML code and replace newline characters
 
