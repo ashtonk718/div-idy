@@ -101,6 +101,16 @@ toggleSwitch.addEventListener('change', function () {
 
 
                 
+
+
+
+
+
+
+
+
+
+
               } else {
                 alert("No data found");
               }
@@ -229,8 +239,18 @@ const dateTimeString = dateString + " " + timeString;
           
           });}
 
-
-
+          const htmlCodeupdate =  document.getElementById('html-input').value
+          const cssCodeupdate  = document.getElementById('css-input').value 
+          const  jsCodeupdate  = document.getElementById('js-input').value  
+      
+              const outputFrame = document.getElementById('outputiframepreview');
+      
+              // Access the contentDocument property directly
+              const outputDocument = outputFrame.contentDocument || outputFrame.contentWindow.document;
+              
+              outputDocument.open();
+              outputDocument.write(`${htmlCodeupdate}<style>${cssCodeupdate}</style><script>${jsCodeupdate}</script>`);
+              outputDocument.close();
 
 
 
