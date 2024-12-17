@@ -144,7 +144,7 @@ function aiproject() {
     let aiinput;
 
     // Get the input for the "pro" side
-    aiinput = "You are on the pro side for a debate for this topic: " + document.getElementById('html-input').value + ". Give an opening response that is under 75 words.";
+    aiinput = "You are on the pro side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 75 words.";
     
     // Make a POST request to the server for the "pro" side
     fetch('/getResponse', {
@@ -167,7 +167,7 @@ function aiproject() {
 
         
         // Now prepare the input for the "con" side
-        let conInput = "You are on the con side for a debate for this topic: " + document.getElementById('html-input').value + ". Give an opening response that is under 75 words.";
+        let conInput = "You are on the con side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 75 words.";
     
         // Make another POST request to the server for the "con" side
         return fetch('/getResponse', {
