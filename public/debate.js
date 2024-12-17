@@ -144,7 +144,7 @@ function aiproject() {
     let aiinput;
 
     // Get the input for the "pro" side
-    aiinput = "You are on the pro side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 75 words.";
+    aiinput = "You are on the pro side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 30 words.";
     
     // Make a POST request to the server for the "pro" side
     fetch('/getResponse', {
@@ -165,9 +165,9 @@ function aiproject() {
 
 
 
-        
+
         // Now prepare the input for the "con" side
-        let conInput = "You are on the con side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 75 words.";
+        let conInput = "You are on the con side for a debate for this topic: " + document.getElementById('debate-input').value + ". Give an opening response that is under 30 words.";
     
         // Make another POST request to the server for the "con" side
         return fetch('/getResponse', {
@@ -184,6 +184,65 @@ function aiproject() {
     
         const conResponse = data.message.content.replace(/\\n/g, '\n'); // Extract and format the con response
         console.log('Con Side:', conResponse);
+
+
+
+
+
+
+        // Now prepare the input for the "con" side
+        let proInput2 = "You are on the pro side for a debate for this topic: " + document.getElementById('debate-input').value + ". Rebuke this statement from the con side in under 30 words" + conResponse;
+    
+        // Make another POST request to the server for the "con" side
+        return fetch('/getResponse', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ aiinput: proInput2 }) // Send the con input to the server
+        });
+      })
+      .then(response => response.json()) // Parse the second response as JSON
+      .then(data => {
+        console.log('Pro Response:', data);
+    
+        const proResponse2 = data.message.content.replace(/\\n/g, '\n'); // Extract and format the con response
+        console.log('Pro Side:', proResponse2);
+
+
+
+
+
+ // Now prepare the input for the "con" side
+ let conInput2 = "You are on the con side for a debate for this topic: " + document.getElementById('debate-input').value + ". Rebuke this statement from the con side in under 30 words" + proResponse2;
+    
+ // Make another POST request to the server for the "con" side
+ return fetch('/getResponse', {
+   method: 'POST',
+   headers: {
+     'Content-Type': 'application/json'
+   },
+   body: JSON.stringify({ aiinput: proResponse2 }) // Send the con input to the server
+ });
+})
+.then(response => response.json()) // Parse the second response as JSON
+.then(data => {
+ console.log('Con Response:', data);
+
+ const conResponse2 = data.message.content.replace(/\\n/g, '\n'); // Extract and format the con response
+ console.log('Con Side:', conResponse2);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
