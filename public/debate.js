@@ -146,7 +146,7 @@ async function aiproject() {
         const debateTopic = document.getElementById('debate-input').value;
   
         // Prepare input for the "pro" side
-        let aiinput = `You are on the pro side for a debate for this topic: ${debateTopic}. Give an opening response that is under 50 words.`;
+        let aiinput = `You are on the pro side of a debate on the topic: "${debateTopic}". Present a compelling opening argument that clearly supports your position. Use persuasive reasoning, include a strong key point, and keep it concise (under 50 words). Avoid vague statements.`;
         
         // Fetch the "pro" side response
         const proResponse = await fetch('/getResponse', {
@@ -167,7 +167,7 @@ async function aiproject() {
 
 
         // Prepare input for the "con" side
-        let conInput = `You are on the con side for a debate for this topic: ${debateTopic}. Give an opening response that is under 50 words.`;
+        let conInput = `You are on the con side of a debate on the topic: "${debateTopic}" & here is the pro's side (opposing side) opening statement "${proMessage}". Present a compelling opening argument that clearly supports your position. Use persuasive reasoning, include a strong key point, and keep it concise (under 50 words). Avoid vague statements.`;
   
         // Fetch the "con" side response
         const conResponse = await fetch('/getResponse', {
@@ -188,7 +188,7 @@ async function aiproject() {
 
 
         // Prepare input for the "pro" rebuttal
-        let proRebuttalInput = `You are on the pro side for a debate for this topic: ${debateTopic}. Rebuke this statement from the con side in under 50 words: "${conMessage}"`;
+        let proRebuttalInput = `You are on the pro side of a debate on the topic: "${debateTopic}". Respond to this statement from the con side: "${conMessage}". Craft a strong rebuttal that highlights flaws in the con argument, provides evidence or reasoning, and reinforces your position. Keep it concise (under 50 words).`;
   
         // Fetch the "pro" rebuttal response
         const proRebuttalResponse = await fetch('/getResponse', {
@@ -210,9 +210,7 @@ async function aiproject() {
 
 
         // Prepare input for the "con" rebuttal
-        let conRebuttalInput = `You are on the con side for a debate for this topic: ${debateTopic}. Rebuke this statement from the pro side in under 50 words: "${proRebuttalMessage}"`;
-
-        console.log('con Rebuttal prompt:', conRebuttalInput);
+        let conRebuttalInput = `You are on the con side of a debate on the topic: "${debateTopic}". Respond to this statement from the con side: "${proRebuttalMessage}". Craft a strong rebuttal that highlights flaws in the con argument, provides evidence or reasoning, and reinforces your position. Keep it concise (under 50 words).`;
 
   
         // Fetch the "con" rebuttal response
@@ -228,6 +226,75 @@ async function aiproject() {
         document.getElementById('con2').style.display = "block";
         document.getElementById('con2').innerText = conRebuttalMessage;
   
+
+
+
+
+
+        // Prepare input for the "pro" rebuttal
+        let proRebuttalInput3 = `You are on the pro side of a debate on the topic: "${debateTopic}". Respond to this statement from the con side: "${conRebuttalMessage}". Craft a strong rebuttal that highlights flaws in the con argument, provides evidence or reasoning, and reinforces your position. Keep it concise (under 50 words).`;
+  
+        // Fetch the "pro" rebuttal response
+        const proRebuttalResponse3 = await fetch('/getResponse', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ aiinput: proRebuttalInput3 }),
+        }).then((response) => response.json());
+  
+        const proRebuttalMessage3 = proRebuttalResponse3.message.content.replace(/\\n/g, '\n');
+        document.getElementById('pro3').style.display = "block";
+        document.getElementById('pro3').innerText = proRebuttalMessage3;
+  
+
+
+
+
+      // Prepare input for the "con" rebuttal
+      let conRebuttalInput3 = `You are on the con side of a debate on the topic: "${debateTopic}". Respond to this statement from the con side: "${proRebuttalMessage3}". Craft a strong rebuttal that highlights flaws in the con argument, provides evidence or reasoning, and reinforces your position. Keep it concise (under 50 words).`;
+
+
+
+      // Fetch the "con" rebuttal response
+      const conRebuttalResponse3 = await fetch('/getResponse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ aiinput: conRebuttalInput3 }),
+      }).then((response) => response.json());
+
+      const conRebuttalMessage3 = conRebuttalResponse3.message.content.replace(/\\n/g, '\n');
+      document.getElementById('con3').style.display = "block";
+      document.getElementById('con3').innerText = conRebuttalMessage3;
+
+
+
+
+
+      // judge
+      let judgeprompt = `You are on the judge of a debate on the topic: "${debateTopic}". Here is the exchange of the two sides Pro Opening Statement: "${proMessage}" Con Opening Statement: "${conMessage}"   Pro Statement: "${proRebuttalMessage}"  Con Statement: "${conRebuttalMessage}"   Pro Statement: "${proRebuttalMessage3}"     Con Statement: "${conRebuttalMessage3}". Declare which side one then explain why their argument was better`;
+
+
+
+      // Fetch the "con" rebuttal response
+      const judgedecision = await fetch('/getResponse', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ aiinput: judgeprompt }),
+      }).then((response) => response.json());
+
+      const judgeMessage = judgedecision.message.content.replace(/\\n/g, '\n');
+      document.getElementById('judge').style.display = "block";
+      document.getElementById('judge').innerText = judgeMessage;
+
+
+
+
+
 
 
 
