@@ -207,7 +207,7 @@ async function aiproject() {
         // Prepare input for the "con" rebuttal
         let conRebuttalInput = `You are on the con side for a debate for this topic: ${debateTopic}. Rebuke this statement from the pro side in under 50 words: "${proRebuttalMessage}"`;
 
-        console.log('con Rebuttal prompt:', proRebuttalMessage);
+        console.log('con Rebuttal prompt:', conRebuttalInput);
 
   
         // Fetch the "con" rebuttal response
