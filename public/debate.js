@@ -140,6 +140,8 @@ async function aiproject() {
     document.getElementById("aierrordebate").innerHTML = "";
   
     if (document.getElementById('debate-input').value !== "") {
+
+        saveprompt ()
       try {
         const debateTopic = document.getElementById('debate-input').value;
   
