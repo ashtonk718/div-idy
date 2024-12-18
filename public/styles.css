@@ -1865,3 +1865,61 @@ main {
 		stroke-dashoffset: -358;
 	}
 }
+
+
+
+
+
+
+
+
+
+
+
+/* Debate */
+
+
+/* Container for the chat box */
+.chat-box {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; /* Spacing between messages */
+    padding: 10px;
+    max-width: 400px; /* Optional: limit the chat box width */
+    background-color: #f5f5f5;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    margin: 0 auto; /* Center the chat box */
+}
+
+/* Shared message styles */
+.messageleft, .messageright {
+    padding: 10px 15px;
+    border-radius: 20px;
+    max-width: 70%; /* Limit the bubble width */
+    word-wrap: break-word;
+    font-size: 14px;
+}
+
+/* Style for left messages */
+.messageleft {
+    background-color: #d1e7dd; /* Light green for Pro messages */
+    align-self: flex-start;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 20px;
+}
+
+/* Style for right messages */
+.messageright {
+    background-color: #f8d7da; /* Light pink for Con messages */
+    align-self: flex-end;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 20px;
+}
+
+/* Optional: chat box scrolling for many messages */
+.chat-box {
+    overflow-y: auto;
+    max-height: 500px; /* Set a height for scrollable chats */
+}
+
