@@ -14,175 +14,69 @@
 </script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Div-idy</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
-<script src="qr.js"></script>
 
+
+    <title>Div-idy: Create Free Webpages with AI in Seconds</title>
+
+    <!-- Meta Description -->
+    <meta name="description" content="Create and publish webpages in seconds for free with Div-idy. Use AI to build pages for any purpose quickly and easily. Perfect for businesses and individuals alike!">
+
+    <!-- Keywords for SEO -->
+    <meta name="keywords" content="Free AI webpage builder, AI webpage builder, create webpages with AI, instant webpage creation, Div-idy, build webpages fast, AI-generated websites, fast webpage builder">
+
+    <!-- Open Graph Metadata -->
+    <meta property="og:title" content="Div-idy: Create Webpages with AI in Seconds for Free">
+    <meta property="og:description" content="With Div-idy, you can create and publish webpages in a single click using AI. Build your online presence instantly!">
+    <meta property="og:url" content="https://www.div-idy.com">
+    <meta property="og:image" content="https://www.div-idy.com/logo.png">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Metadata -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Div-idy: Create Webpages with AI in Seconds">
+    <meta name="twitter:description" content="Launch your webpage instantly with Div-idy. AI-powered webpage creation for everyone!">
+    <meta name="twitter:image" content="https://www.div-idy.com/logo.png">
+
+    <!-- Schema.org Markup for Local Business -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "Div-idy",
+        "url": "https://www.div-idy.com",
+        "logo": "https://www.div-idy.com/logo.png",
+        "applicationCategory": "WebApplication",
+        "operatingSystem": "All",
+        "description": "Div-idy allows users to create and publish webpages in seconds using AI, perfect for both personal and professional use.",
+        "creator": {
+            "@type": "Organization",
+            "name": "Div-idy"
+        }
+    }
+    </script>
+
+
+
+
+
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 </head>
-<body id="devbody">
-
-  <div id="stickypreview">
-
-    <button id="updateoutput">Preview</button>
-  
-  </div>
-
-
-  <div class="navdev">
-       
-    <img src="logo.png" id="headerlogodev">
-
-
-    <div id="devadmin">
-
-      <div id="previewcontainermobile">
-        <button id="backbtndevtoolmobile"> <span class="material-symbols-outlined" id="backarrow">arrow_back</span></button>
-      </div>
-
-
-      <div id="namepro"><input id="proname" type="text"></div>
-    
+<body>
 
     
-    
-      <div class="toggle-container">
-          <label class="switch">
-              <input type="checkbox" id="toggleSwitch">
-              <span class="slider round"></span>
-          </label>
-          <p id="toggleText">Private</p>
-      </div>
-
-
-    
+   <!-- Overlay -->
+<div id="about-us-overlay">
+    <!-- About Us content -->
+    <div id="about-us">
+        <button id="closeaboutus">X</button>
+        <h2>Welcome to<br> <img src="logo.png" id="logoaboutus"></h2>
+        <p>The ultimate platform for web content creation where creativity knows no boundaries. Whether you're a coding virtuoso or a newcomer to the web development scene, Div-idy is your one-stop destination for crafting captivating online experiences effortlessly.</p>
+        <p>For those diving into the world of web design without prior coding experience, Div-idy offers an intuitive interface paired with our groundbreaking "Generate" button. This feature enables you to conjure dynamic content for your webpage with unparalleled ease, eliminating the need for intricate coding knowledge. Dive in and watch your ideas come to life, pixel by pixel, without breaking a sweat.</p>
+        <p>But Div-idy isn't just for beginners; it's a haven for developers seeking a platform to showcase their expertise and collaborate with like-minded individuals. Our robust toolkit empowers developers to fine-tune every aspect of their creations, from intricate design elements to seamless functionality. Whether you're building a personal project or revolutionizing an industry, Div-idy provides the tools and community support to turn your vision into reality.</p>
+        <p>Join our diverse community of creators, designers, and developers, and embark on a journey where innovation thrives and boundaries dissolve. With Div-idy, the possibilities are limitless, and the future of web content is in your hands.</p>
+        <p>Start your journey with Div-idy today – where coding prowess meets creative freedom.</p>
     </div>
-
-</div>
-
-<div id="previewcontainer">
-  <button id="backbtndevtool"> <span class="material-symbols-outlined" id="backarrow">arrow_back</span></button>
-</div>
-
-
-
-
-
-
-
-
-<div id="inputarea">
-
-
-
-  <div id="aicontainer">
-    <label style="font-size: 1em;" id="ailabel">Type what you would like to create</label>
-    <textarea type="text" id="changeai" placeholder="Make me a webpage for a..."></textarea>
-    <div id="aierror"></div>
-    <button id="aibuttonsend">Generate Webpage</button>
-  </div>
-  
-
-
-
-</div>
-
-    
-
-    <div id="code-input">
-        <div class="inputsection">
-          <h2>HTML</h2>
-          <textarea class="inputcode" id="html-input" placeholder="Enter your HTML code here"></textarea>
-        </div>
-        <div class="inputsection">
-          <h2>CSS</h2>
-          <textarea class="inputcode" id="css-input" placeholder="Enter your CSS code here"></textarea>
-        </div>
-        <div class="inputsection">
-          <h2>JavaScript</h2>
-          <textarea class="inputcode" id="js-input" placeholder="Enter your JavaScript code here"></textarea>
-        </div>
-      </div>
-      
-
-    
-    
-
-
-
-
-<div id="loadingMessage">
-  <main>
-    <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" >
-      <defs>
-        <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0%" stop-color="#77f2a1" />
-          <stop offset="33%" stop-color="#4f76f6" />
-          <stop offset="67%" stop-color="#77f2a1" />
-          <stop offset="100%" stop-color="#4f76f6" />
-        </linearGradient>
-        <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
-          <stop offset="0%" stop-color="#77f2a1" />
-          <stop offset="33%" stop-color="#4f76f6" />
-          <stop offset="67%" stop-color="#77f2a1" />
-          <stop offset="100%" stop-color="#4f76f6" />
-        </linearGradient>
-      </defs>
-      <g fill="none" stroke-linecap="round" stroke-width="16">
-        <g class="ip__track" stroke="#ddd">
-          <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-          <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-        </g>
-        <g stroke-dasharray="180 656">
-          <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
-          <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
-        </g>
-      </g>
-    </svg>
-  </main>
-  <h1>Loading</h1>
-
-</div>
-
-
-
-<div id="sharingmodal">
-  <h2>Share your project</h2>
-  <div id="buttons-container">
-    <button id="copyLink">Copy Link</button>
-    <button id="downloadQR">Make QR Code</button>
-  </div>
-  <div id="outputshare"></div>
-</div>
-
-
-<footer class="dividyfooter12">
-   
-  <div class="footer-links">
-      <button id="myaccoutfooter">My Account</button>
-      <button id="aboutusfooter">About Us</button>
-      <button id="privatepolicyfooter">Privacy Policy</button>
-      <button id="termsfooter">Terms of Service</button>
-
-    </div>
-<div class="copyright">
-<p>&copy; 2024 DIV-IDY</p>
-</div>
-</footer>
-
-
- <!-- Overlay -->
- <div id="about-us-overlay">
-  <!-- About Us content -->
-  <div id="about-us">
-      <button id="closeaboutus">X</button>
-      <h2>Welcome to<br> <img src="logo.png" id="logoaboutus"></h2>
-      <p>The ultimate platform for web content creation where creativity knows no boundaries. Whether you're a coding virtuoso or a newcomer to the web development scene, Div-idy is your one-stop destination for crafting captivating online experiences effortlessly.</p>
-      <p>For those diving into the world of web design without prior coding experience, Div-idy offers an intuitive interface paired with our groundbreaking "Generate" button. This feature enables you to conjure dynamic content for your webpage with unparalleled ease, eliminating the need for intricate coding knowledge. Dive in and watch your ideas come to life, pixel by pixel, without breaking a sweat.</p>
-      <p>But Div-idy isn't just for beginners; it's a haven for developers seeking a platform to showcase their expertise and collaborate with like-minded individuals. Our robust toolkit empowers developers to fine-tune every aspect of their creations, from intricate design elements to seamless functionality. Whether you're building a personal project or revolutionizing an industry, Div-idy provides the tools and community support to turn your vision into reality.</p>
-      <p>Join our diverse community of creators, designers, and developers, and embark on a journey where innovation thrives and boundaries dissolve. With Div-idy, the possibilities are limitless, and the future of web content is in your hands.</p>
-      <p>Start your journey with Div-idy today – where coding prowess meets creative freedom.</p>
-  </div>
 </div>
 
 
@@ -233,30 +127,136 @@
 
 
 <div id="terms-of-service-overlay">
-  <!-- Terms of Service content -->
-  <div id="terms-of-service">
-      <button id="close-terms-of-service">X</button>
-      <h2>Terms of Service</h2>
-      <p>Thank you for using our platform. By accessing or using our services, you agree to abide by the following terms and conditions:</p>
-      <ul>
-          <li>You must be at least 18 years old to use our platform.</li>
-          <li>You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account.</li>
-          <li>We do not accept content that contains pornographic material or violates copyright laws.</li>
-          <li>You agree not to use our platform for any illegal or unauthorized purpose.</li>
-          <li>We reserve the right to suspend or terminate your account if you violate any of these terms.</li>
-          <li>Our platform may contain links to third-party websites or services that are not owned or controlled by us. We are not responsible for the content or practices of any third-party sites.</li>
-          <li>We reserve the right to modify or terminate our services at any time without prior notice.</li>
-          <li>By using our platform, you agree to indemnify and hold us harmless from any claims, damages, or losses arising from your use of our services.</li>
-      </ul>
-      <p>If you have any questions or concerns about these terms, please contact us.</p>
-  </div>
+    <!-- Terms of Service content -->
+    <div id="terms-of-service">
+        <button id="close-terms-of-service">X</button>
+        <h2>Terms of Service</h2>
+        <p>Thank you for using our platform. By accessing or using our services, you agree to abide by the following terms and conditions:</p>
+        <ul>
+            <li>You must be at least 18 years old to use our platform.</li>
+            <li>You are responsible for maintaining the confidentiality of your account and password and for restricting access to your account.</li>
+            <li>We do not accept content that contains pornographic material or violates copyright laws.</li>
+            <li>You agree not to use our platform for any illegal or unauthorized purpose.</li>
+            <li>We reserve the right to suspend or terminate your account if you violate any of these terms.</li>
+            <li>Our platform may contain links to third-party websites or services that are not owned or controlled by us. We are not responsible for the content or practices of any third-party sites.</li>
+            <li>We reserve the right to modify or terminate our services at any time without prior notice.</li>
+            <li>By using our platform, you agree to indemnify and hold us harmless from any claims, damages, or losses arising from your use of our services.</li>
+        </ul>
+        <p>If you have any questions or concerns about these terms, please contact us.</p>
+    </div>
 </div>
 
 
-<script type="module" src="devtools.js"></script>
+    <div id="loadingMessage">
+    <main>
+      <svg class="ip" viewBox="0 0 256 128" width="256px" height="128px" >
+        <defs>
+          <linearGradient id="grad1" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stop-color="#77f2a1" />
+            <stop offset="33%" stop-color="#4f76f6" />
+            <stop offset="67%" stop-color="#77f2a1" />
+            <stop offset="100%" stop-color="#4f76f6" />
+          </linearGradient>
+          <linearGradient id="grad2" x1="1" y1="0" x2="0" y2="0">
+            <stop offset="0%" stop-color="#77f2a1" />
+            <stop offset="33%" stop-color="#4f76f6" />
+            <stop offset="67%" stop-color="#77f2a1" />
+            <stop offset="100%" stop-color="#4f76f6" />
+          </linearGradient>
+        </defs>
+        <g fill="none" stroke-linecap="round" stroke-width="16">
+          <g class="ip__track" stroke="#ddd">
+            <path d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+            <path d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+          </g>
+          <g stroke-dasharray="180 656">
+            <path class="ip__worm1" stroke="url(#grad1)" stroke-dashoffset="0" d="M8,64s0-56,60-56,60,112,120,112,60-56,60-56"/>
+            <path class="ip__worm2" stroke="url(#grad2)" stroke-dashoffset="358" d="M248,64s0-56-60-56-60,112-120,112S8,64,8,64"/>
+          </g>
+        </g>
+      </svg>
+    </main>
+    <h1>Loading</h1>
+  
+  </div>
+
+
+  
+ 
+  
+  
+
+
+    <div class="nav">
+
+        <img src="logo.png" id="headerlogo">
+        <div class="navbuttons">
+            <button class="navbuttonsbtn" id="loginhome">Log In</button>
+            <button class="navbuttonsbtn" id="signuphome">Sign Up</button>
+            <button class="navbuttonsbtn" id="accountbtn"></button>
+            <div class="dropdown-content" id="dropdownContent">
+                <button class="dropdown-item" id="myaccountlocation">My Account</button>
+                <button class="dropdown-item" id="logoutbtn">Logout</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="titlepromotion">
+      Build a free 
+      <span id="webexperience-container">
+        <span id="webexperience"></span>
+      </span> 
+      in 3 seconds!
+    </div>
+        <br><br>
+      
+        <button id="backbtn"> <span class="material-symbols-outlined" id="backarrow">arrow_back</span></button>
+      
+
+
+<input type="text" id="debate-input">
+<div id="aierrordebate"></div>
+<button id="aidebatebuttonsend">Start Debate</button>
+
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box">
+          <div class="messageleft" id="pro1"></div>
+          <div class="messageright" id="con1"></div>
+          <div class="messageleft" id="pro2"></div>
+          <div class="messageright" id="con2"></div>
+          <div class="messageleft" id="pro3"></div>
+          <div class="messageright" id="con3"></div>
+        </div>
+        <div id="judge"></div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<footer class="dividyfooter12">
+   
+        <div class="footer-links">
+            <button id="myaccoutfooter">My Account</button>
+            <button id="aboutusfooter">About Us</button>
+            <button id="privatepolicyfooter">Privacy Policy</button>
+            <button id="termsfooter">Terms of Service</button>
+
+          </div>
+    <div class="copyright">
+      <p>&copy; 2024 DIV-IDY</p>
+    </div>
+  </footer>
+
+<script type="module" src="debate.js"></script>
 
 </body>
-
-
-
 </html>
