@@ -158,7 +158,9 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const proMessage = proResponse.message.content.replace(/\\n/g, '\n');
+        document.getElementById('pro1').style.display = "block";
         document.getElementById('pro1').innerText = proMessage;
+
   
 
 
@@ -177,6 +179,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const conMessage = conResponse.message.content.replace(/\\n/g, '\n');
+        document.getElementById('con1').style.display = "block";
         document.getElementById('con1').innerText = conMessage;
 
   
@@ -197,6 +200,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const proRebuttalMessage = proRebuttalResponse.message.content.replace(/\\n/g, '\n');
+        document.getElementById('pro2').style.display = "block";
         document.getElementById('pro2').innerText = proRebuttalMessage;
   
 
@@ -221,6 +225,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const conRebuttalMessage = conRebuttalResponse.message.content.replace(/\\n/g, '\n');
+        document.getElementById('con2').style.display = "block";
         document.getElementById('con2').innerText = conRebuttalMessage;
   
 
