@@ -141,12 +141,12 @@ async function aiproject() {
   
     if (document.getElementById('debate-input').value !== "") {
 
-        saveprompt ()
-      try {
+
+        try {
         const debateTopic = document.getElementById('debate-input').value;
   
         // Prepare input for the "pro" side
-        let aiinput = `You are on the pro side for a debate for this topic: ${debateTopic}. Give an opening response that is under 30 words.`;
+        let aiinput = `You are on the pro side for a debate for this topic: ${debateTopic}. Give an opening response that is under 50 words.`;
         
         // Fetch the "pro" side response
         const proResponse = await fetch('/getResponse', {
@@ -160,8 +160,12 @@ async function aiproject() {
         const proMessage = proResponse.message.content.replace(/\\n/g, '\n');
         console.log('Pro Side:', proMessage);
   
+
+
+
+
         // Prepare input for the "con" side
-        let conInput = `You are on the con side for a debate for this topic: ${debateTopic}. Give an opening response that is under 30 words.`;
+        let conInput = `You are on the con side for a debate for this topic: ${debateTopic}. Give an opening response that is under 50 words.`;
   
         // Fetch the "con" side response
         const conResponse = await fetch('/getResponse', {
@@ -175,8 +179,12 @@ async function aiproject() {
         const conMessage = conResponse.message.content.replace(/\\n/g, '\n');
         console.log('Con Side:', conMessage);
   
+
+
+
+
         // Prepare input for the "pro" rebuttal
-        let proRebuttalInput = `You are on the pro side for a debate for this topic: ${debateTopic}. Rebuke this statement from the con side in under 30 words: "${conMessage}"`;
+        let proRebuttalInput = `You are on the pro side for a debate for this topic: ${debateTopic}. Rebuke this statement from the con side in under 50 words: "${conMessage}"`;
   
         // Fetch the "pro" rebuttal response
         const proRebuttalResponse = await fetch('/getResponse', {
@@ -190,8 +198,17 @@ async function aiproject() {
         const proRebuttalMessage = proRebuttalResponse.message.content.replace(/\\n/g, '\n');
         console.log('Pro Rebuttal:', proRebuttalMessage);
   
+
+
+
+
+
+
         // Prepare input for the "con" rebuttal
-        let conRebuttalInput = `You are on the con side for a debate for this topic: ${debateTopic}. Rebuke this statement from the pro side in under 30 words: "${proRebuttalMessage}"`;
+        let conRebuttalInput = `You are on the con side for a debate for this topic: ${debateTopic}. Rebuke this statement from the pro side in under 50 words: "${proRebuttalMessage}"`;
+
+        console.log('con Rebuttal prompt:', proRebuttalMessage);
+
   
         // Fetch the "con" rebuttal response
         const conRebuttalResponse = await fetch('/getResponse', {
