@@ -158,7 +158,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const proMessage = proResponse.message.content.replace(/\\n/g, '\n');
-        console.log('Pro Side:', proMessage);
+        document.getElementById('pro1').innerText = proMessage;
   
 
 
@@ -177,7 +177,8 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const conMessage = conResponse.message.content.replace(/\\n/g, '\n');
-        console.log('Con Side:', conMessage);
+        document.getElementById('con1').innerText = conMessage;
+
   
 
 
@@ -196,7 +197,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const proRebuttalMessage = proRebuttalResponse.message.content.replace(/\\n/g, '\n');
-        console.log('Pro Rebuttal:', proRebuttalMessage);
+        document.getElementById('pro2').innerText = proRebuttalMessage;
   
 
 
@@ -220,7 +221,7 @@ async function aiproject() {
         }).then((response) => response.json());
   
         const conRebuttalMessage = conRebuttalResponse.message.content.replace(/\\n/g, '\n');
-        console.log('Con Rebuttal:', conRebuttalMessage);
+        document.getElementById('con2').innerText = conRebuttalMessage;
   
 
 
@@ -367,7 +368,6 @@ function gotologin (){
                               }
                           }
   myaccoutfooter.addEventListener('click', myaccoutfooterclick);
-
 
 
 
