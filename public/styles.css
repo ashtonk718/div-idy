@@ -1937,7 +1937,6 @@
 /* Optional: chat box scrolling for many messages */
 .chat-box {
     overflow-y: auto;
-    max-height: 500px; /* Set a height for scrollable chats */
 }
 
 
