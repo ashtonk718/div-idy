@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<div id="loadingMessage">Loading</div>
+
+<textarea name="" id="input"></textarea>
+
+<script>
+
+
+aibuttonsend.addEventListener('click', aiproject);
+
+
+function aiproject() {
+
+  
+    let aiinput;
+    
+      aiinput = document.getElementById('input').value ;
+    
+
+
+
+
+
+
+
+    document.getElementById('loadingMessage').style.display = 'block';
+
+    // Make a POST request to the server
+    fetch('/getResponseo1', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ aiinput: aiinput }) // Send the input to the server
+    })
+    .then(response => response.json()) // Parse the response as JSON
+    .then(data => {
+      document.getElementById('loadingMessage').style.display = 'none';
+      console.log('Response:', data);
+
+     
+    })
+    .catch(error => console.error('Error:', error));
+
+  
+
+
+
+}
+
+
+
+
+
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
