@@ -274,7 +274,7 @@ async function aiproject() {
 
 
       // judge
-      let judgeprompt = `You are on the judge of a debate on the topic: "${debateTopic}". Here is the exchange of the two sides Pro Opening Statement: "${proMessage}" Con Opening Statement: "${conMessage}"   Pro Statement: "${proRebuttalMessage}"  Con Statement: "${conRebuttalMessage}"   Pro Statement: "${proRebuttalMessage3}"     Con Statement: "${conRebuttalMessage3}". Declare which side one then explain why their argument was better`;
+      let judgeprompt = `You are on the judge of a debate on the topic: "${debateTopic}". Here is the exchange of the two sides Pro Opening Statement: "${proMessage}" Con Opening Statement: "${conMessage}"   Pro Statement: "${proRebuttalMessage}"  Con Statement: "${conRebuttalMessage}"   Pro Statement: "${proRebuttalMessage3}"     Con Statement: "${conRebuttalMessage3}". Declare which side won with two possbile answers "Pro is the winner" or "Con is the winner", then explain why their argument was better in 50 words`;
 
 
 
