@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Word Processor</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      background-color: #f0f0f0;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      width: 90%;
+      max-width: 1200px;
+    }
+
+    .toolbar {
+      display: flex;
+      gap: 10px;
+      background-color: #fff;
+      border: 1px solid #ddd;
+      padding: 10px;
+      border-radius: 5px;
+      width: 100%;
+      flex-wrap: wrap;
+    }
+
+    .toolbar button, .toolbar select {
+      background: #007bff;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .toolbar button:hover, .toolbar select:hover {
+      background: #0056b3;
+    }
+
+    .paper {
+      width: 8.5in;
+      min-height: 11in;
+      background-color: white;
+      border: 1px solid #ddd;
+      padding: 1in;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      overflow-y: auto;
+      line-height: 1.6;
+      font-size: 16px;
+      font-family: 'Times New Roman', serif;
+      outline: none;
+      white-space: pre-wrap;
+      margin: 50px;
+    }
+
+    .paper:focus {
+      box-shadow: 0 0 0 2px #007bff;
+    }
+
+    .add-page {
+      background: #28a745;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .add-page:hover {
+      background: #218838;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="toolbar">
+      <button onclick="format('bold')">Bold</button>
+      <button onclick="format('italic')">Italic</button>
+      <button onclick="format('underline')">Underline</button>
+      <select onchange="changeFontFamily(this.value)">
+        <option value="Times New Roman">Times New Roman</option>
+        <option value="Arial">Arial</option>
+        <option value="Courier New">Courier New</option>
+      </select>
+      <select onchange="changeFontSize(this.value)">
+        <option value="16px">16px</option>
+        <option value="18px">18px</option>
+        <option value="20px">20px</option>
+      </select>
+      <button onclick="toggleSpellCheck()">Spell Check</button>
+      <button onclick="addPage()">Add Page</button>
+      <button onclick="saveDocument()">Save</button>
+      <input type="file" id="file-input" class="hidden" onchange="loadDocument(event)" />
+      <button onclick="document.getElementById('file-input').click()">Load</button>
+    </div>
+    <div class="pages">
+      <div class="paper" contenteditable="true" oninput="checkForPageBreak(this)">
+        <!-- Typing area -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function format(command) {
+      document.execCommand(command, false, null);
+    }
+
+    function addPage() {
+      const pagesContainer = document.querySelector('.pages');
+      const newPage = document.createElement('div');
+      newPage.className = 'paper';
+      newPage.contentEditable = "true";
+      newPage.oninput = () => checkForPageBreak(newPage);
+      pagesContainer.appendChild(newPage);
+      newPage.focus();
+    }
+
+    function checkForPageBreak(paper) {
+  const maxHeight = paper.clientHeight; // Maximum height for the current page
+  const pagesContainer = document.querySelector('.pages');
+
+  // While the content exceeds the page's max height
+  while (paper.scrollHeight > maxHeight) {
+    // Create a new page
+    const newPage = document.createElement('div');
+    newPage.className = 'paper';
+    newPage.contentEditable = "true";
+    newPage.oninput = () => checkForPageBreak(newPage);
+
+    // Move excess content to the new page
+    const range = document.createRange();
+    const lastNode = paper.lastChild;
+
+    if (lastNode) {
+      range.selectNodeContents(lastNode);
+      let excessContent = '';
+      
+      while (paper.scrollHeight > maxHeight && lastNode) {
+        // Gradually move content from the first page to the next
+        excessContent = range.extractContents();
+        newPage.appendChild(excessContent);
+      }
+    }
+
+    // Add the new page to the pages container
+    pagesContainer.appendChild(newPage);
+    newPage.focus();
+  }
+}
+
+
+
+    function changeFontFamily(fontFamily) {
+      document.execCommand('fontName', false, fontFamily);
+    }
+
+    function changeFontSize(fontSize) {
+      document.execCommand('fontSize', false, fontSize);
+    }
+
+    function toggleSpellCheck() {
+      const editableElements = document.querySelectorAll('[contenteditable]');
+      editableElements.forEach(element => {
+        element.setAttribute('spellcheck', element.getAttribute('spellcheck') === 'true' ? 'false' : 'true');
+      });
+    }
+
+    function saveDocument() {
+      const content = document.querySelector('.paper').innerHTML;
+      const blob = new Blob([content], { type: 'text/plain' });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'document.txt';
+      link.click();
+      URL.revokeObjectURL(url);
+    }
+
+    function loadDocument(event) {
+      const file = event.target.files[0];
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const content = e.target.result;
+        const page = document.querySelector('.paper');
+        page.innerHTML = content;
+      };
+      reader.readAsText(file);
+    }
+  </script>
+</body>
+</html>
