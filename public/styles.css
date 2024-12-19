@@ -1879,8 +1879,13 @@
 
 .chat-container{
 
-    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centers children horizontally */
+    text-align: center; /* Centers text inside child elements */
+
 }
+
 
 
 #debate-input{
@@ -1907,6 +1912,7 @@
     padding: 10px;
     border-radius: 10px;
     margin: 0 auto; /* Center the chat box */
+
 }
 
 /* Shared message styles */
@@ -1920,18 +1926,20 @@
 
 /* Style for left messages */
 .messageleft {
-    background-color: #d1e7dd; /* Light green for Pro messages */
+    background-color: #77f2a1; /* Light green for Pro messages */
     align-self: flex-start;
     border-top-left-radius: 5px;
     border-top-right-radius: 20px;
+    color: #fff;
 }
 
 /* Style for right messages */
 .messageright {
-    background-color: #f8d7da; /* Light pink for Con messages */
+    background-color: #4f76f6; /* Light pink for Con messages */
     align-self: flex-end;
     border-top-right-radius: 5px;
     border-top-left-radius: 20px;
+    color: #fff;
 }
 
 /* Optional: chat box scrolling for many messages */
@@ -1942,7 +1950,7 @@
 
 
 
-#pro1, #pro2, #pro3, #con1, #con2, #con3, #judge{
+#pro1, #pro2, #pro3, #con1, #con2, #con3{
 
 display: none;
 
@@ -1972,3 +1980,20 @@ display: none;
     transition: all 0.2s ease; /* Smooth transition for all changes */
 
   }
+
+
+
+
+  #judge{
+
+    padding: 10px 15px;
+    border-radius: 20px;
+    width: 70%; 
+    font-size: 18px;
+    background-color: #77f2a1; /* Light green for Pro messages */
+    color: #fff;
+
+  }
+
+
+
