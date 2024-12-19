@@ -1990,7 +1990,8 @@ display: none;
     border-radius: 20px;
     width: 70%; 
     font-size: 18px;
-    background-color: #77f2a1; /* Light green for Pro messages */
+    background: linear-gradient(-45deg, #4f76f6, #77f2a1);
+    background-size: 400% 400%;
     color: #fff;
 
   }
