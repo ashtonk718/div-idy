@@ -1921,7 +1921,7 @@
     border-radius: 20px;
     max-width: 70%; /* Limit the bubble width */
     word-wrap: break-word;
-    font-size: 14px;
+    font-size: 16px;
 }
 
 /* Style for left messages */
