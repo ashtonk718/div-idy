@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Excel Clone</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        #toolbar {
+            padding: 10px;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid #ccc;
+        }
+        #grid {
+            display: grid;
+            grid-template-columns: repeat(26, 100px);
+            grid-auto-rows: 30px;
+        }
+        .header {
+            background-color: #ddd;
+            text-align: center;
+            font-weight: bold;
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+        }
+        .cell {
+            border: 1px solid #ccc;
+            box-sizing: border-box;
+            padding: 5px;
+            outline: none;
+        }
+        .cell:focus {
+            border: 2px solid #4285f4;
+        }
+    </style>
+</head>
+<body>
+    <div id="toolbar">
+        <button onclick="addRow()">Add Row</button>
+        <button onclick="addColumn()">Add Column</button>
+    </div>
+    <div id="grid"></div>
+
+    <script>
+        const grid = document.getElementById('grid');
+        let rows = 20;
+        let cols = 26;
+
+        function createGrid() {
+            grid.innerHTML = '';
+            // Create column headers
+            grid.appendChild(createCell('', 'header'));
+            for(let c = 0; c < cols; c++) {
+                grid.appendChild(createCell(getColumnName(c), 'header'));
+            }
+            // Create rows
+            for(let r = 1; r <= rows; r++) {
+                grid.appendChild(createCell(r, 'header'));
+                for(let c = 0; c < cols; c++) {
+                    const cell = createCell('', 'cell');
+                    cell.contentEditable = true;
+                    cell.dataset.row = r;
+                    cell.dataset.col = c;
+                    grid.appendChild(cell);
+                }
+            }
+        }
+
+        function createCell(content, className) {
+            const div = document.createElement('div');
+            div.className = className;
+            div.textContent = content;
+            return div;
+        }
+
+        function getColumnName(index) {
+            let name = '';
+            while(index >= 0){
+                name = String.fromCharCode((index % 26) + 65) + name;
+                index = Math.floor(index / 26) -1;
+            }
+            return name;
+        }
+
+        function addRow() {
+            rows++;
+            // Add row header
+            grid.appendChild(createCell(rows, 'header'));
+            // Add cells
+            for(let c = 0; c < cols; c++) {
+                const cell = createCell('', 'cell');
+                cell.contentEditable = true;
+                cell.dataset.row = rows;
+                cell.dataset.col = c;
+                grid.appendChild(cell);
+            }
+        }
+
+        function addColumn() {
+            const newCol = cols++;
+            // Add header
+            const header = createCell(getColumnName(newCol), 'header');
+            grid.insertBefore(header, grid.children[newCol + 1]);
+            // Add cells in each row
+            for(let r = 1; r <= rows; r++) {
+                const index = (cols) * r + newCol +1;
+                const cell = createCell('', 'cell');
+                cell.contentEditable = true;
+                cell.dataset.row = r;
+                cell.dataset.col = newCol;
+                grid.insertBefore(cell, grid.children[index]);
+            }
+            // Update grid template
+            grid.style.gridTemplateColumns = `repeat(${cols}, 100px)`;
+        }
+
+        createGrid();
+    </script>
+</body>
+</html>
