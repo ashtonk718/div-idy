@@ -73,32 +73,6 @@ app.post("/getResponse", async (req, res) => { // Change to POST method
 
 
 
-app.post("/getResponseo1", async (req, res) => {
-  const aiinput = req.body.aiinput; // Retrieve the input from the client
-
-  try {
-    const completion = await openai.chat.completions.create({
-      model: "o1-mini", // Chat model
-      messages: [
-        { role: "system", content: "You are a helpful assistant." }, // Define the assistant's behavior
-        { role: "user", content: aiinput }, // User-provided input
-      ],
-    });
-
-    const responseContent = completion.choices[0].message.content; // Extract the assistant's reply
-    res.send(responseContent); // Send the generated response back to the client
-  } catch (error) {
-    console.error("OpenAI API Error:", error);
-    res.status(500).send("Error processing request");
-  }
-});
-
-
-
-
-
-
-
 
 
 
