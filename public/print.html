@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Word Clone</title>
+
+    <style>
+    /* Reset some default styles */
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        margin: 0;
+        font-family: 'Georgia', serif;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        background-color: #f0ebe1; /* Light background to simulate a desk */
+    }
+
+    .toolbar {
+        background-color: #ffffff;
+        padding: 10px 20px;
+        display: flex;
+        flex-wrap: wrap;
+        border-bottom: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+    }
+
+    .group {
+        margin-right: 15px;
+        display: flex;
+        align-items: center;
+    }
+
+    .toolbar button, .toolbar select, .toolbar input[type="color"] {
+        margin-right: 5px;
+        padding: 5px 10px;
+        font-size: 16px;
+        cursor: pointer;
+        background-color: #fafafa;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        transition: background-color 0.3s;
+    }
+
+    .toolbar button:hover, .toolbar select:hover, .toolbar input[type="color"]:hover {
+        background-color: #f0f0f0;
+    }
+
+    #editor-container {
+        flex: 1;
+        display: flex;
+        justify-content: center;
+        align-items: flex-start;
+        padding: 20px;
+        overflow-y: auto;
+    }
+
+    #editor {
+        width: 816px; /* 8.5 inches in pixels */
+        height: 1056px; /* 11 inches in pixels */
+        padding: 50px 60px; /* Simulate real margins */
+        background: white; /* Set paper background to white */
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        border: 1px solid #e0e0e0;
+        line-height: 1.6;
+        font-size: 18px;
+        resize: none;
+    }
+
+    #editor:focus {
+        outline: none;
+    }
+
+    /* Styling for buttons */
+    .toolbar button {
+        background-color: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+
+    .toolbar button:hover {
+        background-color: #e0e0e0;
+    }
+
+    /* Scrollbar styling for editor */
+    #editor::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    #editor::-webkit-scrollbar-track {
+        background: #f1f1f1;
+    }
+
+    #editor::-webkit-scrollbar-thumb {
+        background: #c1c1c1;
+        border-radius: 4px;
+    }
+
+    #editor::-webkit-scrollbar-thumb:hover {
+        background: #a8a8a8;
+    }
+    </style>
+    
+</head>
+<body>
+    <div class="toolbar">
+        <div class="group">
+            <button onclick="formatText('bold')" title="Bold"><b>B</b></button>
+            <button onclick="formatText('italic')" title="Italic"><i>I</i></button>
+            <button onclick="formatText('underline')" title="Underline"><u>U</u></button>
+        </div>
+        <div class="group">
+            <select onchange="formatBlock(this.value)" title="Format">
+                <option selected>Normal</option>
+                <option value="h1">Heading 1</option>
+                <option value="h2">Heading 2</option>
+                <option value="h3">Heading 3</option>
+            </select>
+            <select onchange="changeFont(this.value)" title="Font">
+                <option selected>Font</option>
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+            </select>
+            <input type="color" onchange="changeTextColor(this.value)" title="Text Color">
+            <input type="color" onchange="changeBGColor(this.value)" title="Background Color">
+        </div>
+        <div class="group">
+            <button onclick="insertUnorderedList()" title="Unordered List">• List</button>
+            <button onclick="insertOrderedList()" title="Ordered List">1. List</button>
+            <button onclick="insertLink()" title="Insert Link">🔗 Link</button>
+        </div>
+    </div>
+    <div id="editor-container">
+        <div id="editor" contenteditable="true">
+            <p>Start writing your document here...</p>
+        </div>
+    </div>
+
+    <script>
+    function formatText(command, value = null) {
+        document.execCommand(command, false, value);
+    }
+
+    function formatBlock(block) {
+        if (block === 'Normal') {
+            formatText('formatBlock', 'p');
+        } else {
+            formatText('formatBlock', block);
+        }
+    }
+
+    function changeFont(font) {
+        if (font !== 'Font') {
+            formatText('fontName', font);
+        }
+    }
+
+    function changeTextColor(color) {
+        formatText('foreColor', color);
+    }
+
+    function changeBGColor(color) {
+        formatText('hiliteColor', color);
+    }
+
+    function insertUnorderedList() {
+        formatText('insertUnorderedList');
+    }
+
+    function insertOrderedList() {
+        formatText('insertOrderedList');
+    }
+
+    function insertLink() {
+        const url = prompt("Enter the URL");
+        if (url) {
+            formatText('createLink', url);
+        }
+    }
+    </script>
+</body>
+</html>
