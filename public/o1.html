@@ -7,12 +7,12 @@
 </head>
 <body>
     
-<div id="loadingMessage">Loading</div>
+<div id="loadingMessage" style="display: none;">Loading</div>
 
 <textarea name="" id="input"></textarea>
 
 
-<button id="aibuttonsend"></button>
+<button id="aibuttonsend">AI</button>
 
 <script>
 
@@ -36,22 +36,27 @@ function aiproject() {
 
     document.getElementById('loadingMessage').style.display = 'block';
 
-    // Make a POST request to the server
-    fetch('/getResponseo1', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ aiinput: aiinput }) // Send the input to the server
-    })
-    .then(response => response.json()) // Parse the response as JSON
-    .then(data => {
-      document.getElementById('loadingMessage').style.display = 'none';
-      console.log('Response:', data);
 
-     
-    })
-    .catch(error => console.error('Error:', error));
+fetch('/getResponseo1', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({ aiinput }) // Send the input to the server
+})
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    return response.json(); // Parse the response as JSON
+  })
+  .then(data => {
+    document.getElementById('loadingMessage').style.display = 'none';
+    console.log('Response:', data);
+
+
+  })
+  .catch(error => console.error('Error:', error));
 
   
 
